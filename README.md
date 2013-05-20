@@ -16,6 +16,8 @@ At its simplest, a Bnum defines a collection of names:
 False
 >>> Colour.red == Colour.red
 True
+>>> Colour.red.name
+'red'
 ```
 
 Values
@@ -28,7 +30,7 @@ from 0 or 1, or bit fields.
 With Bnum, you can choose the kind of value using a mixin:
 
 ```python
->>> class Emphasis(Bnum,Bits):
+>>> class Emphasis(Bnum, Bits):
 ...     italic
 ...     strong
 ...     underline
@@ -39,7 +41,7 @@ With Bnum, you can choose the kind of value using a mixin:
 4
 >>> 2 & (Emphasis.italic | Emphasis.strong)
 2
->>> class Weekday(Bnum,FromOne):
+>>> class Weekday(Bnum, FromOne):
 ...     monday
 ...     ...
 ...     sunday
@@ -63,7 +65,7 @@ but by default it's an error to repeat a value:
 ...     a = 1
 ...     b = 1
 Error: blah blah
->>> class OK(Bnum,AllowAliases):
+>>> class OK(Bnum, AllowAliases):
 ...     a = 1
 ...     b = 1
 ...
@@ -90,7 +92,7 @@ Colour('blue')
 but you can also order by value:
 
 ```python
->>> class Colour(Bnum,OrderByValue):
+>>> class Colour(Bnum, OrderByValue):
 ...     red = 2
 ...     green = 1
 ...     blue = 3
