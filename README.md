@@ -50,12 +50,13 @@ With Bnum, you can choose the kind of value using a mixin:
 7
 ```
 
-You can also specify your own values:
+You can also specify your own values (the default is the name):
 
 ```python
 >>> class Strange(Bnum):
 ...     foo = 42
 ...     bar = 'fish'
+...     baz  # = 'baz'
 ```
 
 but by default it's an error to repeat a value:
