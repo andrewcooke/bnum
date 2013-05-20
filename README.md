@@ -103,3 +103,16 @@ green
 red
 blue
 ```
+
+
+Retrieving Instances
+--------------------
+
+```python
+>>> Colour('red')
+red
+>>> Colour(name='green')
+green
+>>> Weekday(value=1)
+monday
+```
