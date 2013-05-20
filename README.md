@@ -109,10 +109,10 @@ Retrieving Instances
 --------------------
 
 ```python
->>> Colour('red')
-red
 >>> Colour(name='green')
 green
+>>> Colour('red')  # default is name
+red
 >>> Weekday(value=1)
 monday
 ```
