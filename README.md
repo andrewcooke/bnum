@@ -42,6 +42,8 @@ With Bnum, the default value is the name:
 red
 >>> Colour.red
 red
+>>> type(Colour.red.value)
+<class 'str'>
 ```
 
 You can choose a different value using a mixin.  Alternatives include `Bits`,
@@ -55,6 +57,8 @@ You can choose a different value using a mixin.  Alternatives include `Bits`,
 ...
 >>> Emphasis.underline.value
 1
+>>> type(Emphasis.underline.value)
+<class 'int'>
 >>> Emphasis.strong.value
 4
 >>> Emphasis.strong.name
