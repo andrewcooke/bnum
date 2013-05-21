@@ -37,7 +37,8 @@ Often, names are all you need (think of atoms in Lisp).  But some languages
 associate *values* with enumerations.  These are often integers, counting
 from 0 or 1, or bit fields.
 
-With Bnum, you can choose the kind of value using a mixin:
+With Bnum, you can choose the kind of value using a mixin.  The default value
+is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
