@@ -40,10 +40,10 @@ True
 And you can iterate over the instances defined in a class:
 
 ```python
->>> len(Colour)
-3
 >>> list(Colour)
 ['blue', 'green', 'red']  # TODO - check
+>>> len(Colour)
+3
 ```
 
 Values
@@ -54,7 +54,7 @@ With Bnum, the default, implicit value of an instance is its name:
 ```python
 >>> Colour.red.value
 red
->>> Colour.red
+>>> Colour.red  # this is str() of the value, which is the value, which is the name
 red
 >>> type(Colour.red.value)
 <class str>
