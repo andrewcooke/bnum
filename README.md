@@ -52,7 +52,7 @@ With Bnum, you can choose the kind of value using a mixin:
 7
 >>> Weekday.sunday.name
 'sunday'
->>> Weekday.sunday
+>>> str(Weekday.sunday)
 '7'
 >>> repr(Weekday.sunday):
 Weekday(name='sunday', value=7)
