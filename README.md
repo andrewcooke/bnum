@@ -25,7 +25,7 @@ Colour('red')
 Colour('red')
 ```
 
-It's an error to use the same name twice:
+It's an error to use the same name twice (*can this be detected?*):
 
 ```python
 >>> class Duplicate(Bnum):
