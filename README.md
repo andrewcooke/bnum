@@ -32,7 +32,7 @@ Values
 ------
 
 Often, names are all you need (think of atoms in Lisp).  But some languages
-associate *values* with enumerations.  These are often integers, counting
+associate *values* with enumerations.  These are usually integers, counting
 from 0 or 1, or bit fields.
 
 With Bnum, the default value is the name:
