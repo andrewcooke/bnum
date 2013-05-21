@@ -146,12 +146,15 @@ Emphasis(name='italic', value=2)
 Error: blah blah
 ```
 
-Iteration and Ordering
-----------------------
+Ordering
+--------
 
-Iteration order is based on *value*.  Since the default value is the name
-itself, the default ordering is alphabetical (from comparison of the `str`
-values).
+Values are used in expressions - like comparison - using instances.  So
+if you sort a list of instances they will be sorted by value.  This is the
+same ordering that is used for iteration over Bnum contents.
+
+Since the default value is the name itself, the default ordering when iterating
+over a Bnum is alphabetical (from comparison of the `str` values).
 
 ```python
 >>> list(Colour)
