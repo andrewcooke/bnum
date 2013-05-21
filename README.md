@@ -150,40 +150,14 @@ Error: blah blah
 Iteration and Ordering
 ----------------------
 
-When you iterate over the class (which gives you the instances) the results are
-ordered by *value*.  Since the default value is the name itself, the default
-ordering is alphabetical (from comparison of the `str` values):
+You can iterate over the instances defined in a class:
 
 ```python
->>> class Colour(Bnum):
-...     red
-...     green
-...     blue
-...
->>> for colour in Colour: print(colour)
-blue
-green
-red
+>>> len(Colour)
+3
+>>> list(Colour)
+['blue', 'green', 'red']  # TODO - check
 ```
-
-If you choose numerical values (and don't give them yourself) then the
-ordering will be as written in the class definition (because they are numbered
-in the order given there):
-
-```python
->>> class Emphasis(Bnum, Bits):
-...     underline
-...     italic
-...     bold
-...
->>> for emphasis in Emphasis: print(repr(emphasis))
-Emphasis(name='underline', value=1)
-Emphasis(name='italic', value=2)
-Emphasis(name='bold', value=4)
-```
-
-Mixing value types (like in `Strange`, above) may make comparison undefined.
-In such cases, the order will be arbitrary (but fixed and error-free).
 
 You can also check whether an instance belongs to a Bnum class, but you
 must use an instance, not a value:
@@ -196,6 +170,24 @@ False
 >>> Colour('red') in Colour
 True
 ```
+
+The iteration is ordered by *value*.  Since the default value is the name
+itself, the default ordering is alphabetical (from comparison of the `str`
+values).
+
+If you choose numerical values (and don't give them yourself) then the
+ordering will be as written in the class definition (because they are numbered
+in the order given there):
+
+```python
+>>> for emphasis in Emphasis: print(repr(emphasis))
+Emphasis(name='underline', value=1)
+Emphasis(name='italic', value=2)
+Emphasis(name='bold', value=4)
+```
+
+Mixing value types (like in `Strange`, above) may make comparison undefined.
+In such cases, the order will be arbitrary (but fixed and error-free).
 
 Aliases
 -------
@@ -218,5 +210,5 @@ Error: blah blah
 >>> repr(OK('b'))
 OK(name='a', value=1)
 >>> list(OK)
-[1]  # TODO - check the correct output here
+[1]  # TODO - check the correct output here; maybe len() would be better?
 ```
