@@ -218,3 +218,7 @@ Given the simplicity of the basic concepts - a name and a value in a scope -
 the number of differences between Bnum and Enum is surprising:
 
 * Something
+
+Despite these, my hope is that Bnum is sufficiently flexible to adapt to most
+uses of Enum without too much work (this is why, for example, Bnum supports
+aliases, which I would not otherwise have considered).
