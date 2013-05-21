@@ -63,21 +63,6 @@ You can also specify your own values (the default is the name):
 ...     baz  # = 'baz'
 ```
 
-but by default it's an error to repeat a value:
-
-```python
->>> class Error(Bnum):
-...     a = 1
-...     b = 1
-Error: blah blah
->>> class OK(Bnum, AllowAliases):
-...     a = 1
-...     b = 1
-...
->>> OK('b')
-OK('a')
-```
-
 Retrieving Instances
 --------------------
 
@@ -127,3 +112,23 @@ Emphasis(name='underline', value=1)
 Emphasis(name='italic', value=2)
 Emphasis(name='strong', value=4)
 ```
+
+Aliases
+-------
+
+It's an error to repeat a value unless you explicitly allow for aliases.
+Aliases are valid instances, but are not listed or retrieved.
+
+```python
+>>> class Error(Bnum):
+...     a = 1
+...     b = 1  # an alias
+Error: blah blah
+>>> class OK(Bnum, AllowAliases):
+...     a = 1
+...     b = 1
+...
+>>> OK('b')
+OK('a')
+```
+
