@@ -38,7 +38,7 @@ It's an error to use the same name twice (*can this be detected?*):
 Values
 ------
 
-Often, names are all you need (think of atoms in Lisp).  But some languages
+Often, names are all you need (think of symbols in Lisp).  But some languages
 associate alternative *values* with enumerations.  These are usually integers,
 counting from 0 or 1, or bit fields.
 
