@@ -65,30 +65,6 @@ Often, names are all you need (think of symbols in Lisp), but some languages
 associate alternative values with enumerations (think of enums in Java).
 These are usually integers, counting from 0 or 1, or bit fields.
 
-Using the `Bits` mixin provides bit fields:
-
-```python
->>> class Emphasis(Bnum, Bits):
-...     underline
-...     italic
-...     bold
-...
->>> Emphasis.underline.value
-1
->>> type(Emphasis.underline.value)
-<class int>
->>> Emphasis.bold.value
-4
->>> Emphasis.bold.name
-bold
->>> int(Emphasis.bold)
-4
->>> str(Emphasis.bold)
-4
->>> 2 & (Emphasis.italic | Emphasis.bold)
-2
-```
-
 The `FromOne` mixin provides integers counting from 1 (there's also a
 `FromZero` that, yes, you guessed right):
 
@@ -115,6 +91,30 @@ Weekday(name='sunday', value=7)
 Note that values are automatically used in expressions involving instances.
 This means that that `__str__()` returns the value (as a string), so that
 the value of instances will be correctly converted to strings.
+
+Using the `Bits` mixin provides bit fields:
+
+```python
+>>> class Emphasis(Bnum, Bits):
+...     underline
+...     italic
+...     bold
+...
+>>> Emphasis.underline.value
+1
+>>> type(Emphasis.underline.value)
+<class int>
+>>> Emphasis.bold.value
+4
+>>> Emphasis.bold.name
+bold
+>>> int(Emphasis.bold)
+4
+>>> str(Emphasis.bold)
+4
+>>> 2 & (Emphasis.italic | Emphasis.bold)
+2
+```
 
 You can also specify your own, explicit values (and they can even have mixed
 types, although that may make ordering unclear - see below):
