@@ -12,14 +12,16 @@ At its simplest, a Bnum defines a collection of names:
 ...     green
 ...     blue
 ...
->>> Colour.red
-'red'
 >>> Colour.red == Color.blue
 False
 >>> Colour.red == Colour.red
 True
 >>> isinstance(Colour.red, Colour):
 True
+>>> str(Colour.red)
+'red'
+>>> repr(Colour.red)
+Colour('red')
 ```
 
 Values
@@ -54,7 +56,7 @@ With Bnum, you can choose the kind of value using a mixin:
 ...     ...
 ...     sunday
 ...
->>> Weekday.sunday
+>>> Weekday.sunday  # uses str()
 7
 >>> Weekday.sunday.name
 'sunday'
