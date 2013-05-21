@@ -79,7 +79,7 @@ bold
 ```
 
 The `FromOne` mixin provides integers counting from 1 (there's also a
-`FromZero` that does what you guessed):
+`FromZero` that, yes, you guessed right):
 
 ```python
 >>> class Weekday(Bnum, FromOne):
