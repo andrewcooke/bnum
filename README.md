@@ -36,7 +36,7 @@ retrieved by calling the class:
 True
 ```
 
-And you can iterate over the instances defined in a class:
+And the class behaves like a collection of the instances it contains:
 
 ```python
 >>> list(Colour)
