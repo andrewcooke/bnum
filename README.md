@@ -135,11 +135,11 @@ Aliases are valid instances, but are not listed or retrieved.
 ```python
 >>> class Error(Bnum):
 ...     a = 1
-...     b = 1  # an alias
+...     b = 1  # an error
 Error: blah blah
 >>> class OK(Bnum, AllowAliases):
 ...     a = 1
-...     b = 1
+...     b = 1  # an alias
 ...
 >>> repr(OK('b'))
 OK(name='a', value=1)
