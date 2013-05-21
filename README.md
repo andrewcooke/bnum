@@ -99,7 +99,7 @@ Ordering
 --------
 
 When you iterate over the contents they are ordered by *value*.  The default
-value is the name itself, so by default they are ordered alphabetically.
+value is the name itself, so by default they are ordered alphabetically:
 
 ```python
 >>> class Colour(Bnum):
@@ -114,7 +114,7 @@ value is the name itself, so by default they are ordered alphabetically.
 ```
 
 If you choose numerical values (and don't give them yourself) then the
-ordering will be as given:
+ordering will be as given (because they are numbered in the order given):
 
 ```python
 >>> class Emphasis(Bnum, Bits):
