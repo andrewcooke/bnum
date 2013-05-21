@@ -127,8 +127,8 @@ TODO
 Retrieving Instances
 --------------------
 
-Instances can be retrieved by name or value (or both, provided they are
-consistent):
+If you have the name or value (or both, as long as they are consistent), then
+you can get the appropriate instance by calling the class:
 
 ```python
 >>> repr(Colour('red'))  # default is name
