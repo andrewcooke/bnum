@@ -1,7 +1,7 @@
 A Simpler, Better Enum For Python 3
 ===================================
 
-At its simplest, a Bnum defines a collection of names:
+At its simplest, a Bnum defines a collection of distinct names:
 
 ```python
 >>> class Colour(Bnum):
@@ -23,6 +23,16 @@ red
 Colour('red')
 >>> repr(Colour('red'))  # retrieves instance from name
 Colour('red')
+```
+
+It's an error to use the same name twice:
+
+```python
+>>> class Duplicate(Bnum):
+...     red
+...     red
+...
+>>> Error: blah blah
 ```
 
 Values
