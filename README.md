@@ -37,7 +37,7 @@ You can iterate over the instances defined in a class:
 Values
 ------
 
-With Bnum, the default, implicit value of an instance is the name:
+With Bnum, the default, implicit value of an instance is its name:
 
 ```python
 >>> Colour.red.value
