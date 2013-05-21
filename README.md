@@ -88,6 +88,10 @@ sunday
 Weekday(name='sunday', value=7)
 ```
 
+The final line above shows that when a Bnum name and value differ, both are
+shown in the output from `repr()`.  That same syntax can also be used to
+retrieve values - see below.
+
 Using the `Bits` mixin provides bit fields:
 
 ```python
