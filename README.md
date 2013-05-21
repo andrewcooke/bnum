@@ -133,6 +133,8 @@ you can get the appropriate instance by calling the class:
 ```python
 >>> repr(Colour('red'))  # default is name
 Colour('red')
+>>> Colour('red') is Colour.red
+True
 >>> repr(Colour(name='green'))
 Colour('green')
 >>> repr(Colour(value='blue'))
