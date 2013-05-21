@@ -99,7 +99,8 @@ Colour('green')
 Colour('red')
 ```
 
-but if you choose numerical values the ordering will be as given:
+If you choose numerical values (and don't give them yourself) then the
+ordering will be as given:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
