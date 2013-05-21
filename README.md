@@ -42,8 +42,8 @@ Often, names are all you need (think of symbols in Lisp).  But some languages
 associate alternative *values* with enumerations.  These are usually integers,
 counting from 0 or 1, or bit fields.
 
-With Bnum, the default implicit value is the name (this makes "name only" use
-simple and consistent):
+With Bnum, the default implicit value is the name.  This makes "name only" use
+simple and consistent:
 
 ```python
 >>> Colour.red.value
@@ -54,8 +54,8 @@ red
 <class str>
 ```
 
-You can choose a different implicit value using a mixin.  Alternatives include
-`Bits`, `FromZero` and `FromOne`:
+But if you want an integer value you can choose different behaviour using a
+mixin.  Alternatives include `Bits`, `FromZero` and `FromOne`:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
@@ -111,6 +111,12 @@ You can also specify your own explicit values:
 
 The only value you can't have is `None` (that will be treated as a missing
 value and an implicit value supplied - the name by default).
+
+Finally, you can also implement support for alternative implicit values:
+
+```python
+TODO
+```
 
 Retrieving Instances
 --------------------
