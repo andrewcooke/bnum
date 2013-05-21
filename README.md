@@ -1,8 +1,5 @@
-A Simpler, Better Enum For Python
-=================================
-
-Note - this is just a first draft and may contain impossible syntax or
-semantics.
+A Simpler, Better Enum For Python 3
+===================================
 
 At its simplest, a Bnum defines a collection of names:
 
