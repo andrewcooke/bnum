@@ -155,6 +155,9 @@ Emphasis(name='italic', value=2)
 Emphasis(name='strong', value=4)
 ```
 
+Mixing value types (like in `Strange`, above) may make comparison undefined.
+In such cases, the order will be arbitrary (but fixed and error-free).
+
 Aliases
 -------
 
