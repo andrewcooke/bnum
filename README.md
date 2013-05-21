@@ -20,10 +20,6 @@ True
 True
 >>> Colour.red.name
 red
->>> Colour.red.value  # see below for more on values
-red
->>> Colour.red  # uses str() on the value
-red
 >>> repr(Colour.red)
 Colour('red')
 >>> repr(Colour('red'))  # retrieves instance from name
@@ -37,8 +33,17 @@ Often, names are all you need (think of atoms in Lisp).  But some languages
 associate *values* with enumerations.  These are often integers, counting
 from 0 or 1, or bit fields.
 
-With Bnum, you can choose the kind of value using a mixin.  The default value
-is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
+With Bnum, the default value is the name:
+
+```python
+>>> Colour.red.value  # see below for more on values
+red
+>>> Colour.red  # uses str() on the value
+red
+```
+
+You can choose a different value using a mixin.  Alternatives include `Bits`,
+`FromZero` and `FromOne`:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
