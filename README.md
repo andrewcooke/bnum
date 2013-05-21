@@ -18,16 +18,14 @@ False
 True
 >>> isinstance(Colour.red, Colour):
 True
->>> str(Colour.red)
-'red'
->>> repr(Colour.red)
-Colour('red')
 >>> Colour.red.name
 'red'
 >>> Colour.red.value
 'red'
->>> Colour.red
+>>> Colour.red  # uses str()
 'red'
+>>> repr(Colour.red)
+Colour('red')
 >>> repr(Colour('red'))
 Colour('red')
 ```
