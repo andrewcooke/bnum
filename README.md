@@ -25,14 +25,13 @@ Colour('red')
 Colour('red')
 ```
 
-It's an error to use the same name twice (*can this be detected?*):
+You can iterate over the instances defined in a class:
 
 ```python
->>> class Duplicate(Bnum):
-...     red
-...     red
-...
->>> Error: blah blah
+>>> len(Colour)
+3
+>>> list(Colour)
+['blue', 'green', 'red']  # TODO - check
 ```
 
 Values
@@ -150,30 +149,14 @@ Error: blah blah
 Iteration and Ordering
 ----------------------
 
-You can iterate over the instances defined in a class:
+Iteration order is based on *value*.  Since the default value is the name
+itself, the default ordering is alphabetical (from comparison of the `str`
+values).
 
 ```python
->>> len(Colour)
-3
 >>> list(Colour)
 ['blue', 'green', 'red']  # TODO - check
 ```
-
-You can also check whether an instance belongs to a Bnum class, but you
-must use an instance, not a value:
-
-```python
->>> Colour.red in Colour
-True
->>> 'red' in Colour
-False
->>> Colour('red') in Colour
-True
-```
-
-The iteration is ordered by *value*.  Since the default value is the name
-itself, the default ordering is alphabetical (from comparison of the `str`
-values).
 
 If you choose numerical values (and don't give them yourself) then the
 ordering will be as written in the class definition (because they are numbered
