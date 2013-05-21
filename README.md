@@ -88,10 +88,6 @@ sunday
 Weekday(name='sunday', value=7)
 ```
 
-Note that values are automatically used in expressions involving instances.
-This means that that `__str__()` returns the value (as a string), so that
-the value of instances will be correctly converted to strings.
-
 Using the `Bits` mixin provides bit fields:
 
 ```python
@@ -115,6 +111,10 @@ bold
 >>> 2 & (Emphasis.italic | Emphasis.bold)
 2
 ```
+
+Note that values are automatically used in expressions involving instances.
+This means that that `__str__()` returns the value (as a string), so that
+the value of instances will be correctly converted to strings.
 
 You can also specify your own, explicit values (and they can even have mixed
 types, although that may make ordering unclear - see below):
