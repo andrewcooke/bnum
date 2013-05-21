@@ -161,16 +161,18 @@ In such cases, the order will be arbitrary (but fixed and error-free).
 Aliases
 -------
 
-It's an error to repeat a value unless you explicitly allow for aliases.
-Aliases are valid instances, but are not listed or retrieved.
+It's an error to repeat a value, because mixing implicit and explicit values
+could give very confusing bugs, unless you explicitly allow for aliases.
+
+Aliases are valid instances, but are not listed or retrieved:
 
 ```python
->>> class Error(Bnum):
-...     a = 1
+>>> class Error(Bnum, FromOne):
+...     a
 ...     b = 1  # an error
 Error: blah blah
->>> class OK(Bnum, AllowAliases):
-...     a = 1
+>>> class OK(Bnum, FromOne, AllowAliases):
+...     a
 ...     b = 1  # an alias
 ...
 >>> repr(OK('b'))
