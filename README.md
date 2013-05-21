@@ -147,8 +147,8 @@ Emphasis(name='italic', value=2)
 Error: blah blah
 ```
 
-Ordering
---------
+Iteration and Ordering
+----------------------
 
 When you iterate over the class (which gives you the instances) the results are
 ordered by *value*.  Since the default value is the name itself, the default
@@ -184,6 +184,18 @@ Emphasis(name='bold', value=4)
 
 Mixing value types (like in `Strange`, above) may make comparison undefined.
 In such cases, the order will be arbitrary (but fixed and error-free).
+
+You can also check whether an instance belongs to a Bnum class, but you
+must use an instance, not a value:
+
+```python
+>>> Colour.red in Colour
+True
+>>> 'red' in Colour
+False
+>>> Colour('red') in Colour
+True
+```
 
 Aliases
 -------
