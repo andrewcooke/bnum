@@ -44,7 +44,7 @@ With Bnum, you can choose the kind of value using a mixin:
 >>> Emphasis.strong.name
 'strong'
 >>> int(Emphasis.strong)
-'4'
+4
 >>> str(Emphasis.strong)
 '4'
 >>> 2 & (Emphasis.italic | Emphasis.strong)
