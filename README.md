@@ -48,9 +48,9 @@ red
 <class str>
 ```
 
-Often, names are all you need (think of symbols in Lisp).  But some languages
-associate alternative values with enumerations.  These are usually integers,
-counting from 0 or 1, or bit fields.
+Often, names are all you need (think of symbols in Lisp), but some languages
+associate alternative values with enumerations (think of enums in Java).
+These are usually integers, counting from 0 or 1, or bit fields.
 
 Using the `Bits` mixin provides bit fields:
 
