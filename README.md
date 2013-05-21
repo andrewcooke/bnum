@@ -50,21 +50,21 @@ You can choose a different value using a mixin.  Alternatives include `Bits`,
 >>> class Emphasis(Bnum, Bits):
 ...     underline
 ...     italic
-...     strong
+...     bold
 ...
 >>> Emphasis.underline.value
 1
 >>> type(Emphasis.underline.value)
 <class int>
->>> Emphasis.strong.value
+>>> Emphasis.bold.value
 4
->>> Emphasis.strong.name
-strong
->>> int(Emphasis.strong)
+>>> Emphasis.bold.name
+bold
+>>> int(Emphasis.bold)
 4
->>> str(Emphasis.strong)
+>>> str(Emphasis.bold)
 4
->>> 2 & (Emphasis.italic | Emphasis.strong)
+>>> 2 & (Emphasis.italic | Emphasis.bold)
 2
 >>> class Weekday(Bnum, FromOne):
 ...     monday
@@ -147,12 +147,12 @@ ordering will be as given (because they are numbered in the order given):
 >>> class Emphasis(Bnum, Bits):
 ...     underline
 ...     italic
-...     strong
+...     bold
 ...
 >>> for emphasis in Emphasis: print(repr(emphasis))
 Emphasis(name='underline', value=1)
 Emphasis(name='italic', value=2)
-Emphasis(name='strong', value=4)
+Emphasis(name='bold', value=4)
 ```
 
 Mixing value types (like in `Strange`, above) may make comparison undefined.
