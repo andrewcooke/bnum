@@ -217,4 +217,6 @@ Error: blah blah
 ...
 >>> repr(OK('b'))
 OK(name='a', value=1)
+>>> list(OK)
+['a']  # TODO - check that str() is used here
 ```
