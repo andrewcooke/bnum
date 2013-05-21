@@ -99,7 +99,7 @@ You can also specify your own values:
 ```
 
 The only value you can't have is `None` (that will be treated as a missing
-value and a default given, which is the name).
+value and an implicit value supplied - the name by default).
 
 Retrieving Instances
 --------------------
