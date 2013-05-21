@@ -12,12 +12,12 @@ At its simplest, a Bnum defines a collection of names:
 ...     green
 ...     blue
 ...
+>>> Colour.red
+'red'
 >>> Colour.red == Color.blue
 False
 >>> Colour.red == Colour.red
 True
->>> Colour.red.name
-'red'
 >>> isinstance(Colour.red, Colour):
 True
 ```
@@ -50,9 +50,17 @@ With Bnum, you can choose the kind of value using a mixin:
 ...
 >>> Weekday.sunday.value
 7
+>>> Weekday.sunday.name
+'sunday'
+>>> Weekday.sunday
+'7'
+>>> repr(Weekday.sunday):
+Weekday(name='sunday', value=7)
 ```
 
-Note that the values are automatically used in expressions.
+Note that values are automatically used in expressions.  This means that
+that `__str__()` returns the value (as a string), so that instances will
+ be correctly converted to strings.
 
 You can also specify your own values (the default is the name):
 
@@ -67,16 +75,16 @@ Retrieving Instances
 --------------------
 
 ```python
->>> Colour(name='green')
-green
->>> Colour('red')  # default is name
-red
->>> Colour(name='red', value='red')
-red
+>>> repr(Colour('red'))  # default is name
+Colour('red')
+>>> repr(Colour(name='green'))
+Colour('green')
+>>> repr(Colour(name='blue', value='blue'))
+Colour('blue')
 >>> Colour(name='red', value='blue')
 Error: blah blah
->>> Emphasis(value=2)
-italic
+>>> repr(Emphasis(value=2))
+Emphasis(name='italic', value=2)
 >>> Emphasis(value=3)
 Error: blah blah
 ```
@@ -94,9 +102,9 @@ value is the name itself, so by default they are ordered alphabetically.
 ...     blue
 ...
 >>> for colour in Colour: print(colour)
-Colour('blue')
-Colour('green')
-Colour('red')
+'blue'
+'green'
+'red'
 ```
 
 If you choose numerical values (and don't give them yourself) then the
@@ -108,7 +116,7 @@ ordering will be as given:
 ...     italic
 ...     strong
 ...
->>> for emphasis in Emphasis: print(emphasis)
+>>> for emphasis in Emphasis: print(repr(emphasis))
 Emphasis(name='underline', value=1)
 Emphasis(name='italic', value=2)
 Emphasis(name='strong', value=4)
@@ -129,7 +137,6 @@ Error: blah blah
 ...     a = 1
 ...     b = 1
 ...
->>> OK('b')
-OK('a')
+>>> repr(OK('b'))
+OK(name='a', value=1)
 ```
-
