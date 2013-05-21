@@ -22,6 +22,12 @@ True
 'red'
 >>> repr(Colour.red)
 Colour('red')
+>>> Colour.red.name
+'red'
+>>> Colour.red.value
+'red'
+>>> Colour.red
+'red'
 ```
 
 Values
