@@ -26,7 +26,7 @@ True
 'red'
 >>> repr(Colour.red)
 Colour('red')
->>> repr(Colour('red'))
+>>> repr(Colour('red'))  # retrieves instance from name
 Colour('red')
 ```
 
