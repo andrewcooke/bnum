@@ -112,7 +112,7 @@ consistent):
 Colour('red')
 >>> repr(Colour(name='green'))
 Colour('green')
->>> repr(Colour(name='blue', value='blue'))
+>>> repr(Colour(value='blue'))
 Colour('blue')
 >>> Colour(name='red', value='blue')
 Error: blah blah
