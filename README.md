@@ -113,7 +113,7 @@ types, although that may make ordering unclear - see below):
 The only value you can't have is `None` (that will be treated as a missing
 value and an implicit value supplied - the name by default).
 
-Finally, you can also implement support for alternative implicit values:
+Finally, you can implement support for alternative implicit values:
 
 ```python
 TODO
