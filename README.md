@@ -151,7 +151,7 @@ Ordering
 --------
 
 When you iterate over the class (which gives you the instances) the results are
-ordered by *value*.  Since default value is the name itself, the default
+ordered by *value*.  Since the default value is the name itself, the default
 ordering is alphabetical (from comparison of the `str` values):
 
 ```python
@@ -167,7 +167,8 @@ red
 ```
 
 If you choose numerical values (and don't give them yourself) then the
-ordering will be as given (because they are numbered in the order given):
+ordering will be as written in the class definition (because they are numbered
+in the order given there):
 
 ```python
 >>> class Emphasis(Bnum, Bits):
