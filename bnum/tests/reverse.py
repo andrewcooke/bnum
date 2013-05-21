@@ -1,8 +1,9 @@
 
+from unittest import TestCase
+
 '''
 Check / learn / reverse engineer a bunch of details about Python.
 '''
-from unittest import TestCase
 
 
 class Display:

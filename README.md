@@ -89,8 +89,8 @@ Weekday(name='sunday', value=7)
 ```
 
 Note that values are automatically used in expressions.  This means that
-that `__str__()` returns the value (as a string), so that instances will
- be correctly converted to strings.
+that `__str__()` returns the value (as a string), so that the value of
+instances will be correctly converted to strings.
 
 You can also specify your own values (the default is the name):
 
