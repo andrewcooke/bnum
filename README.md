@@ -150,8 +150,9 @@ Error: blah blah
 Ordering
 --------
 
-When you iterate over the contents they are ordered by *value*.  The default
-value is the name itself, so by default they are ordered alphabetically:
+When you iterate over the class (which gives you the instances) the results are
+ordered by *value*.  Since default value is the name itself, the default
+ordering is alphabetical (from comparison of the `str` values):
 
 ```python
 >>> class Colour(Bnum):
