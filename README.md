@@ -150,13 +150,9 @@ you can get the appropriate instance by calling the class:
 True
 >>> Colour(name='green') is Colour.green
 True
->>> Colour(value='blue') is Colour.blue
-True
->>> Colour(name='red', value='blue')
-Error: blah blah
 >>> repr(Emphasis(value=2))
 Emphasis(name='italic', value=2)
->>> Emphasis(value=3)
+>>> Emphasis(name='italic', value=3)
 Error: blah blah
 ```
 
