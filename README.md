@@ -1,5 +1,5 @@
-A Better Enum For Python
-========================
+A Simpler, Better Enum For Python
+=================================
 
 Note - this is just a first draft and may contain impossible syntax or
 semantics.
