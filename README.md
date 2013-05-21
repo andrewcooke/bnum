@@ -41,6 +41,12 @@ With Bnum, you can choose the kind of value using a mixin:
 1
 >>> Emphasis.strong.value
 4
+>>> Emphasis.strong.name
+'strong'
+>>> int(Emphasis.strong)
+'4'
+>>> str(Emphasis.strong)
+'4'
 >>> 2 & (Emphasis.italic | Emphasis.strong)
 2
 >>> class Weekday(Bnum, FromOne):
@@ -48,12 +54,10 @@ With Bnum, you can choose the kind of value using a mixin:
 ...     ...
 ...     sunday
 ...
->>> Weekday.sunday.value
+>>> Weekday.sunday
 7
 >>> Weekday.sunday.name
 'sunday'
->>> str(Weekday.sunday)
-'7'
 >>> repr(Weekday.sunday):
 Weekday(name='sunday', value=7)
 ```
