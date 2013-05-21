@@ -141,14 +141,12 @@ If you have the name or value (or both, as long as they are consistent), then
 you can get the appropriate instance by calling the class:
 
 ```python
->>> repr(Colour('red'))  # default is name
-Colour('red')
 >>> Colour('red') is Colour.red
 True
->>> repr(Colour(name='green'))
-Colour('green')
->>> repr(Colour(value='blue'))
-Colour('blue')
+>>> Colour(name='green') is Colour.green
+True
+>>> Colour(value='blue') is Colour.blue
+True
 >>> Colour(name='red', value='blue')
 Error: blah blah
 >>> repr(Emphasis(value=2))
