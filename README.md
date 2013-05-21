@@ -8,7 +8,6 @@ At its simplest, a Bnum defines a collection of distinct names:
 ...     red
 ...     green
 ...     blue
-...
 ```
 
 These can be tested for equality, are instances of the class on which they
@@ -44,6 +43,8 @@ And you can iterate over the instances defined in a class:
 ['blue', 'green', 'red']  # TODO - check
 >>> len(Colour)
 3
+>>> Colour.red in Colour
+True
 ```
 
 Values
@@ -141,7 +142,7 @@ If you have the name or value (or both, as long as they are consistent), then
 you can get the appropriate instance by calling the class:
 
 ```python
->>> Colour('red') is Colour.red
+>>> Colour('red') is Colour.red  # default is to use the name
 True
 >>> Colour(name='green') is Colour.green
 True
