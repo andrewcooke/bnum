@@ -1,5 +1,5 @@
-A Simpler, Better Enum For Python 3
-===================================
+A Better Enum For Python 3
+==========================
 
 At its simplest, a Bnum defines a collection of distinct names:
 
