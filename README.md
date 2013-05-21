@@ -100,7 +100,8 @@ Note that values are automatically used in expressions.  This means that
 that `__str__()` returns the value (as a string), so that the value of
 instances will be correctly converted to strings.
 
-You can also specify your own explicit values:
+You can also specify your own, explicit values (and they can have mixed types,
+although that may make ordering unclear - see below):
 
 ```python
 >>> class Strange(Bnum):
