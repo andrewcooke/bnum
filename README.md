@@ -214,7 +214,7 @@ Comparison with Enum
 
 Python has an official Enum type, described ...
 
-Given the basic concepts - a name and a value - the number of differences
-between Bnum and Enum is surprising:
+Given the simplicity of the basic concepts - a name and a value in a scope -
+the number of differences between Bnum and Enum is surprising:
 
 * Something
