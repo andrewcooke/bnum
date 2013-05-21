@@ -54,9 +54,7 @@ red
 <class str>
 ```
 
-But if you want an integer value you can choose different behaviour using a
-mixin.  Alternatives include `Bits`, `FromZero` and `FromOne`.  The `Bits`
-mixin provides bit fields:
+Using the `Bits` mixin provides bit fields:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
@@ -80,7 +78,8 @@ bold
 2
 ```
 
-The `FromOne` mixin provides integers counting from 1:
+The `FromOne` mixin provides integers counting from 1 (there's also a
+`FromZero` that does what you guessed):
 
 ```python
 >>> class Weekday(Bnum, FromOne):
