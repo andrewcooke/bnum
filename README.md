@@ -201,8 +201,8 @@ Aliases
 -------
 
 By default, it is an error to repeat a value, because mixing implicit and
-explicit values could give very confusing bugs.  You can disable this by
-adding the `AllowAliases` mixin.
+explicit values could give very confusing bugs.  You can disable this safety
+check by adding the `AllowAliases` mixin.
 
 Aliases are valid instances, but are not listed or retrieved:
 
