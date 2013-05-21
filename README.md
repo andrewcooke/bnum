@@ -101,6 +101,9 @@ You can also specify your own values (the default is the name):
 ...     baz  # = 'baz'
 ```
 
+The only value you can't have is `None` (that will be treated as a missing
+value and a default given, which is the name).
+
 Retrieving Instances
 --------------------
 
