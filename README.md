@@ -60,7 +60,11 @@ is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
 2
 >>> class Weekday(Bnum, FromOne):
 ...     monday
-...     ...
+...     tuesday
+...     wednesday
+...     thursday
+...     friday
+...     saturday
 ...     sunday
 ...
 >>> Weekday.sunday  # uses str()
