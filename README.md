@@ -208,3 +208,13 @@ OK(name='a', value=1)
 >>> list(OK)
 [1]  # TODO - check the correct output here; maybe len() would be better?
 ```
+
+Comparison with Enum
+--------------------
+
+Python has an official Enum type, described ...
+
+Given the basic concepts - a name and a value - the number of differences
+between Bnum and Enum is surprising:
+
+* Something
