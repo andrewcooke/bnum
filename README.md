@@ -19,11 +19,11 @@ True
 >>> isinstance(Colour.red, Colour):
 True
 >>> Colour.red.name
-'red'
+red
 >>> Colour.red.value
-'red'
+red
 >>> Colour.red  # uses str()
-'red'
+red
 >>> repr(Colour.red)
 Colour('red')
 >>> repr(Colour('red'))  # retrieves instance from name
@@ -51,11 +51,11 @@ is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
 >>> Emphasis.strong.value
 4
 >>> Emphasis.strong.name
-'strong'
+strong
 >>> int(Emphasis.strong)
 4
 >>> str(Emphasis.strong)
-'4'
+4
 >>> 2 & (Emphasis.italic | Emphasis.strong)
 2
 >>> class Weekday(Bnum, FromOne):
@@ -70,9 +70,9 @@ is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
 >>> Weekday.sunday.value
 7
 >>> Weekday.sunday.name
-'sunday'
+sunday
 >>> Weekday.sunday  # uses str(), which converts the value to a string
-'7'
+7
 >>> repr(Weekday.sunday):
 Weekday(name='sunday', value=7)
 ```
@@ -124,9 +124,9 @@ value is the name itself, so by default they are ordered alphabetically:
 ...     blue
 ...
 >>> for colour in Colour: print(colour)
-'blue'
-'green'
-'red'
+blue
+green
+red
 ```
 
 If you choose numerical values (and don't give them yourself) then the
