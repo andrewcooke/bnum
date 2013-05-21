@@ -89,13 +89,13 @@ Note that values are automatically used in expressions.  This means that
 that `__str__()` returns the value (as a string), so that the value of
 instances will be correctly converted to strings.
 
-You can also specify your own values (the default is the name):
+You can also specify your own values:
 
 ```python
 >>> class Strange(Bnum):
 ...     foo = 42
 ...     bar = 'fish'
-...     baz  # = 'baz'
+...     baz  # = 'baz' since no other value mixin used
 ```
 
 The only value you can't have is `None` (that will be treated as a missing
