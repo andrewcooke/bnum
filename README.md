@@ -20,9 +20,9 @@ True
 True
 >>> Colour.red.name
 red
->>> Colour.red.value
+>>> Colour.red.value  # see below for more on values
 red
->>> Colour.red  # uses str()
+>>> Colour.red  # uses str() on the value
 red
 >>> repr(Colour.red)
 Colour('red')
