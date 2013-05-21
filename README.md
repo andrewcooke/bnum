@@ -9,6 +9,12 @@ At its simplest, a Bnum defines a collection of distinct names:
 ...     green
 ...     blue
 ...
+```
+
+These can be tested for equality, are instances of the class on which they
+are declared, and can be displayed in the usual ways:
+
+```python
 >>> Colour.red == Color.blue
 False
 >>> Colour.red == Colour.red
@@ -21,11 +27,17 @@ red
 red
 >>> repr(Colour.red)
 Colour('red')
->>> repr(Colour('red'))  # retrieves instance from name
-Colour('red')
 ```
 
-You can iterate over the instances defined in a class:
+If you have a name (as a string) then the appropriate instance can be
+retrieved by calling the class:
+
+```python
+>>> Colour('red') is Colour.red
+True
+```
+
+And you can iterate over the instances defined in a class:
 
 ```python
 >>> len(Colour)
