@@ -200,8 +200,9 @@ True
 Aliases
 -------
 
-It's an error to repeat a value, because mixing implicit and explicit values
-could give very confusing bugs, unless you explicitly allow for aliases.
+By default, iqt's an error to repeat a value, because mixing implicit and
+explicit values could give very confusing bugs.  You can disable this by
+adding the `AllowAliases` mixin.
 
 Aliases are valid instances, but are not listed or retrieved:
 
