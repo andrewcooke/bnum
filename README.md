@@ -20,6 +20,8 @@ True
 True
 >>> Colour.red.name
 red
+>>> Colour.red  # uses str() on the value - see more below
+red
 >>> repr(Colour.red)
 Colour('red')
 >>> repr(Colour('red'))  # retrieves instance from name
@@ -36,9 +38,9 @@ from 0 or 1, or bit fields.
 With Bnum, the default value is the name:
 
 ```python
->>> Colour.red.value  # see below for more on values
+>>> Colour.red.value
 red
->>> Colour.red  # uses str() on the value
+>>> Colour.red
 red
 ```
 
