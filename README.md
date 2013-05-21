@@ -68,7 +68,7 @@ is the name, but alternatives include `Bits`, `FromZero` and `FromOne`:
 ...     sunday
 ...
 >>> Weekday.sunday  # uses str(), which converts the value to a string
-7
+'7'
 >>> Weekday.sunday.name
 'sunday'
 >>> repr(Weekday.sunday):
