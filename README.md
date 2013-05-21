@@ -86,6 +86,9 @@ You can also specify your own values (the default is the name):
 Retrieving Instances
 --------------------
 
+Instances can be retrieved by name or value (or both, provided they are
+consistent):
+
 ```python
 >>> repr(Colour('red'))  # default is name
 Colour('red')
