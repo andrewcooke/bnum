@@ -37,12 +37,7 @@ You can iterate over the instances defined in a class:
 Values
 ------
 
-Often, names are all you need (think of symbols in Lisp).  But some languages
-associate alternative *values* with enumerations.  These are usually integers,
-counting from 0 or 1, or bit fields.
-
-With Bnum, the default implicit value is the name.  This makes "name only" use
-simple and consistent:
+With Bnum, the default, implicit value of an instance is the name:
 
 ```python
 >>> Colour.red.value
@@ -52,6 +47,10 @@ red
 >>> type(Colour.red.value)
 <class str>
 ```
+
+Often, names are all you need (think of symbols in Lisp).  But some languages
+associate alternative values with enumerations.  These are usually integers,
+counting from 0 or 1, or bit fields.
 
 Using the `Bits` mixin provides bit fields:
 
