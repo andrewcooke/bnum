@@ -18,6 +18,8 @@ False
 True
 >>> Colour.red.name
 'red'
+>>> isinstance(Colour.red, Colour):
+True
 ```
 
 Values
@@ -31,13 +33,13 @@ With Bnum, you can choose the kind of value using a mixin:
 
 ```python
 >>> class Emphasis(Bnum, Bits):
+...     underline
 ...     italic
 ...     strong
-...     underline
 ...
->>> Emphasis.italic.value
-1
 >>> Emphasis.underline.value
+1
+>>> Emphasis.strong.value
 4
 >>> 2 & (Emphasis.italic | Emphasis.strong)
 2
@@ -49,6 +51,8 @@ With Bnum, you can choose the kind of value using a mixin:
 >>> Weekday.sunday.value
 7
 ```
+
+Note that the values are automatically used in expressions.
 
 You can also specify your own values (the default is the name):
 
@@ -74,37 +78,6 @@ Error: blah blah
 OK('a')
 ```
 
-Ordering
---------
-
-By default, contents are ordered as given in the source.
-
-```python
->>> for colour in Colour: print(str(colour))
-red
-green
-blue
->>> for colour in Colour: print(repr(colour))
-Colour('red')
-Colour('green')
-Colour('blue')
-```
-
-but you can also order by value:
-
-```python
->>> class Colour(Bnum, OrderByValue):
-...     red = 2
-...     green = 1
-...     blue = 3
-...
->>> for colour in Colour: print(str(colour))
-green
-red
-blue
-```
-
-
 Retrieving Instances
 --------------------
 
@@ -113,6 +86,44 @@ Retrieving Instances
 green
 >>> Colour('red')  # default is name
 red
->>> Weekday(value=1)
-monday
+>>> Colour(name='red', value='red')
+red
+>>> Colour(name='red', value='blue')
+Error: blah blah
+>>> Emphasis(value=2)
+italic
+>>> Emphasis(value=3)
+Error: blah blah
+```
+
+Ordering
+--------
+
+When you iterate over the contents they are ordered by *value*.  The default
+value is the name itself, so by default they are ordered alphabetically.
+
+```python
+>>> class Colour(Bnum):
+...     red
+...     green
+...     blue
+...
+>>> for colour in Colour: print(colour)
+Colour('blue')
+Colour('green')
+Colour('red')
+```
+
+but if you choose numerical values the ordering will be as given:
+
+```python
+>>> class Emphasis(Bnum, Bits):
+...     underline
+...     italic
+...     strong
+...
+>>> for emphasis in Emphasis: print(emphasis)
+Emphasis(name='underline', value=1)
+Emphasis(name='italic', value=2)
+Emphasis(name='strong', value=4)
 ```
