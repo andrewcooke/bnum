@@ -28,6 +28,8 @@ Colour('red')
 'red'
 >>> Colour.red
 'red'
+>>> repr(Colour('red'))
+Colour('red')
 ```
 
 Values
