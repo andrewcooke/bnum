@@ -196,7 +196,8 @@ By default, it is an error to repeat a value, because mixing implicit and
 explicit values could give very confusing bugs.  You can disable this safety
 check by adding the `AllowAliases` mixin.
 
-Aliases are valid instances, but are not listed or retrieved:
+Aliases are valid instances, but are not listed or retrieved (frankly, I think
+they're a mistake, but Bnum provides them to help inter-operate with Enum):
 
 ```python
 >>> class Error(Bnum, FromOne):
