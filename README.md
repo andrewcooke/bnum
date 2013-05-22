@@ -145,8 +145,8 @@ You can even mix value types, although it make make the ordering undefined
 ...     baz  # = 'baz' - implicitly the name, since no mixin used
 ```
 
-The only value you cannot have is `None`, which will be treated as a missing
-value and replaced by an implicit value.
+The only value you cannot have is `None`, which will be treated as missing
+and replaced by an implicit value.
 
 Finally, you can implement support for alternative implicit values:
 
