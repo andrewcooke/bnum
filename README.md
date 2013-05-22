@@ -36,7 +36,7 @@ retrieved by calling the class:
 True
 ```
 
-And the class behaves like a collection of the instances it contains:
+And the class itself behaves as a collection of the instances it contains:
 
 ```python
 >>> list(Colour)
@@ -50,7 +50,18 @@ True
 Values
 ------
 
-With Bnum, the default, implicit value of an instance is its name:
+Instances have values as well as names.  You can specify the value explicitly:
+
+```python
+>>> class FavouriteNumbers(Bnum):
+...     forty_two = 42
+...     seven = 7
+...
+>>> FavouriteNumbers.seven
+7
+```
+
+The default, implicit value of an instance is its name:
 
 ```python
 >>> Colour.red.value
@@ -120,8 +131,8 @@ Note that values are automatically used in expressions involving instances.
 This means that that `__str__()` returns the value (as a string), so that
 the value of instances will be correctly converted to strings.
 
-You can also specify your own, explicit values (and they can even have mixed
-types, although that may make ordering unclear - see below):
+You can even mix value types, although it make make the ordering undefined
+(see below):
 
 ```python
 >>> class Strange(Bnum):
@@ -130,8 +141,8 @@ types, although that may make ordering unclear - see below):
 ...     baz  # = 'baz' - implicitly the name, since no mixin used
 ```
 
-The only value you cannot have is `None` (that will be treated as a missing
-value and an implicit value supplied - the name by default).
+The only value you cannot have is `None`, which will be treated as a missing
+value and replaced by an implicit value.
 
 Finally, you can implement support for alternative implicit values:
 
