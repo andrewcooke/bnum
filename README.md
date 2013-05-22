@@ -50,18 +50,7 @@ True
 Values
 ------
 
-Instances have values as well as names.  You can specify the value explicitly:
-
-```python
->>> class FavouriteNumbers(Bnum):
-...     forty_two = 42
-...     seven = 7
-...
->>> FavouriteNumbers.seven.value
-7
->>> FavouriteNumbers.seven  # the value is used when you reference the instance
-7
-```
+Instances have values as well as names.
 
 The default, implicit value of an instance is its name (which is why the
 initial `Colour` example returned the name):
@@ -77,9 +66,23 @@ red
 
 Often, names are all you need (think of symbols in Lisp), but some languages
 associate alternative values with enumerations (think of enums in Java).
-These are usually integers, counting from 0 or 1, or bit fields.
 
-Bnum will provide alternative values if you use an appropriate mixin.
+You can specify the value explicitly:
+
+```python
+>>> class FavouriteNumbers(Bnum):
+...     forty_two = 42
+...     seven = 7
+...
+>>> FavouriteNumbers.seven.value
+7
+>>> FavouriteNumbers.seven  # the value is used when you reference the instance
+7
+```
+
+But usually you want integers, counting from 0 or 1, or bit fields and
+Bnum will provide these if you use an appropriate mixin.
+
 The `FromOne` mixin provides integers counting from 1 (there's also a
 `FromZero` that, yes, you guessed right):
 
