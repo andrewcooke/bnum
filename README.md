@@ -211,7 +211,8 @@ explicit values could give very confusing bugs.  You can disable this safety
 check by adding the `AllowAliases` mixin.
 
 Aliases are valid instances, but are not listed or retrieved (frankly, I think
-they're a mistake, but Bnum provides them to help inter-operate with Enum):
+they're a mistake, but Bnum provides them to help inter-operate with Python's
+Enum):
 
 ```python
 >>> class Error(Bnum, FromOne):
