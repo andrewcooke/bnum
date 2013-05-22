@@ -138,7 +138,7 @@ Note that values are automatically used in expressions involving instances.
 This means that that `__str__()` returns the value (as a string), so that
 the value of instances will be correctly converted to strings.
 
-You can even mix value types, although it make make the ordering undefined
+You can even mix value types, although it may make the ordering undefined
 (see below):
 
 ```python
