@@ -57,11 +57,14 @@ Instances have values as well as names.  You can specify the value explicitly:
 ...     forty_two = 42
 ...     seven = 7
 ...
->>> FavouriteNumbers.seven
+>>> FavouriteNumbers.seven.value
+7
+>>> FavouriteNumbers.seven  # the value is used when you reference the instance
 7
 ```
 
-The default, implicit value of an instance is its name:
+The default, implicit value of an instance is its name (which is why the
+initial `Colour` example returned the name):
 
 ```python
 >>> Colour.red.value
