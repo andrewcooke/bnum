@@ -80,11 +80,11 @@ You can specify the value explicitly:
 7
 ```
 
-But usually you want integers, counting from 0 or 1, or bit fields and
+But usually you want integers, counting from 0 or 1, or bit fields, and
 Bnum will provide these if you use an appropriate mixin.
 
-The `FromOne` mixin provides integers counting from 1 (there's also a
-`FromZero` that, yes, you guessed right):
+For example, the `FromOne` mixin provides integers counting from 1 (there's
+also a `FromZero` that, yes, you guessed right):
 
 ```python
 >>> class Weekday(Bnum, FromOne):
