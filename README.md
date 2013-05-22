@@ -79,6 +79,7 @@ Often, names are all you need (think of symbols in Lisp), but some languages
 associate alternative values with enumerations (think of enums in Java).
 These are usually integers, counting from 0 or 1, or bit fields.
 
+Bnum will provide alternative values if you use an appropriate mixin.
 The `FromOne` mixin provides integers counting from 1 (there's also a
 `FromZero` that, yes, you guessed right):
 
