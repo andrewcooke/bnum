@@ -147,7 +147,7 @@ TypeError: blah, blah
 ```
 
 To make the final line work as you might expect, see the
-[section on inheritance](#Inheritance) below.
+[section on inheritance](#inheritance) below.
 
 You can even mix value types, although it may make the [ordering](#Ordering)
 undefined:
