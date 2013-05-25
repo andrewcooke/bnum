@@ -1,6 +1,11 @@
 A Better Enum For Python 3
 ==========================
 
+Basic Use
+---------
+
+### Names
+
 At its simplest, a Bnum defines a collection of distinct names:
 
 ```python
@@ -22,18 +27,8 @@ True
 True
 >>> Colour.red.name
 red
->>> Colour.red  # uses str() on the value - see more below
-red
 >>> repr(Colour.red)
 Colour('red')
-```
-
-If you have a name (as a string) then the appropriate instance can be
-retrieved by calling the class:
-
-```python
->>> Colour('red') is Colour.red
-True
 ```
 
 And the class itself behaves as a collection of the instances it contains:
@@ -47,13 +42,11 @@ And the class itself behaves as a collection of the instances it contains:
 True
 ```
 
-Values
-------
+### Values
 
 Instances have values as well as names.
 
-The default, implicit value of an instance is its name (which is why the
-initial `Colour` example returned the name):
+The default, implicit value of an instance is its name:
 
 ```python
 >>> Colour.red.value
@@ -62,6 +55,14 @@ red
 red
 >>> type(Colour.red.value)
 <class str>
+```
+
+If you have a name (as a string) then the appropriate instance can be
+retrieved by calling the class:
+
+```python
+>>> Colour('red') is Colour.red
+True
 ```
 
 Often, names are all you need (think of symbols in Lisp), but some languages
@@ -76,18 +77,19 @@ You can specify the value explicitly:
 ...
 >>> FavouriteNumbers.seven.value
 7
->>> FavouriteNumbers.seven  # the value is used when you reference the instance
+>>> FavouriteNumbers.seven  # this is str() of the value
 7
 ```
 
 But usually you want integers, counting from 0 or 1, or bit fields, and
-Bnum will provide these if you use an appropriate mixin.
+Bnum will provide these if you use a suitable `values` argument in the
+class.
 
-For example, the `FromOne` mixin provides integers counting from 1 (there's
-also a `FromZero` that, yes, you guessed right):
+For example, `values=from_one` provides integers counting from 1 (there's
+also a `from_zero` that, yes, you guessed right):
 
 ```python
->>> class Weekday(Bnum, FromOne):
+>>> class Weekday(Bnum, values=from_one):
 ...     monday
 ...     tuesday
 ...     wednesday
@@ -96,24 +98,22 @@ also a `FromZero` that, yes, you guessed right):
 ...     saturday
 ...     sunday
 ...
->>> Weekday.sunday.value
-7
 >>> Weekday.sunday.name
 sunday
->>> Weekday.sunday  # uses str(), which converts the value to a string
+>>> Weekday.sunday.value
 7
 >>> repr(Weekday.sunday):
-Weekday(name='sunday', value=7)
+Weekday(value=7, name='sunday')
 ```
 
 The final line above shows that when an instance's name and value differ, both
 are shown in the output from `repr()`.  That same syntax can also be used to
 retrieve values - see the next section.
 
-Using the `Bits` mixin provides bit fields:
+Using `values=bits` provides bit fields:
 
 ```python
->>> class Emphasis(Bnum, Bits):
+>>> class Emphasis(Bnum, values=bits):
 ...     underline
 ...     italic
 ...     bold
@@ -126,26 +126,21 @@ Using the `Bits` mixin provides bit fields:
 4
 >>> Emphasis.bold.name
 bold
->>> int(Emphasis.bold)
-4
->>> str(Emphasis.bold)
-4
 >>> 2 & (Emphasis.italic | Emphasis.bold)
-2
+TypeError: blah, blah
 ```
 
-Note that values are automatically used in expressions involving instances.
-This means that that `__str__()` returns the value (as a string), so that
-the value of instances will be correctly converted to strings.
+To make the final line work as you might expect, see the
+[section on inheritance](#Inheritance) below.
 
-You can even mix value types, although it may make the ordering undefined
-(see below):
+You can even mix value types, although it may make the [ordering](#Ordering)
+undefined:
 
 ```python
 >>> class Strange(Bnum):
 ...     foo = 42
 ...     bar = 'fish'
-...     baz  # = 'baz' - implicitly the name, since no mixin used
+...     baz  # = 'baz' - implicitly the name, since no values argument given
 ```
 
 The only value you cannot have is `None`, which will be treated as missing
@@ -157,25 +152,25 @@ Finally, you can implement support for alternative implicit values:
 TODO
 ```
 
-Retrieving Instances
---------------------
+### Retrieving Instances
 
-If you have the name or value (or both, as long as they are consistent), then
+If you have the value, or name (or both, as long as they are consistent), then
 you can get the appropriate instance by calling the class:
 
 ```python
->>> Colour('red') is Colour.red  # default is to use the name
+>>> Colour('red') is Colour.red  # default is to use the value
 True
->>> Colour(name='green') is Colour.green
-True
->>> repr(Emphasis(value=2))
-Emphasis(name='italic', value=2)
->>> Emphasis(name='italic', value=3)
+>>> repr(Emphasis(2))
+Emphasis(value=2, name='italic')
+>>> repr(Emphasis(name='italic'))
+Emphasis(value=2, name='italic')
+>>> Emphasis(name='italic')
+Emphasis(value=2, name='italic')
+>>> Emphasis(value=3, name='italic')
 Error: blah blah
 ```
 
-Ordering
---------
+### Ordering
 
 Values are used in expressions - like comparison - using instances.  So
 if you sort a list of instances they will be sorted by value.  This is the
@@ -203,23 +198,22 @@ Emphasis(name='bold', value=4)
 Mixing value types (like in `Strange`, above) may make comparison undefined.
 In such cases, the order will be arbitrary (but fixed and error-free).
 
-Aliases
--------
+### Aliases
 
 By default, it is an error to repeat a value, because mixing implicit and
 explicit values could give very confusing bugs.  You can disable this safety
-check by adding the `AllowAliases` mixin.
+check by setting `allow_aliases=True`.
 
 Aliases are valid instances, but are not listed or retrieved (frankly, I think
 they're a mistake, but Bnum provides them to help inter-operate with Python's
 Enum):
 
 ```python
->>> class Error(Bnum, FromOne):
+>>> class Error(Bnum, values=from_one):
 ...     a
 ...     b = 1  # an error
 Error: blah blah
->>> class OK(Bnum, FromOne, AllowAliases):
+>>> class OK(Bnum, values=from_one, allow_aliases=True):
 ...     a
 ...     b = 1  # an alias
 ...
