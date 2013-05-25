@@ -196,9 +196,9 @@ in the order given there):
 
 ```python
 >>> for emphasis in Emphasis: print(repr(emphasis))
-Emphasis(name='underline', value=1)
-Emphasis(name='italic', value=2)
-Emphasis(name='bold', value=4)
+Emphasis(value=1, name='underline')
+Emphasis(value=2, name='italic')
+Emphasis(value=4, name='bold')
 ```
 
 Mixing value types (like in `Strange`, above) may make comparison undefined.
