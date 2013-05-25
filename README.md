@@ -276,7 +276,7 @@ used as the basis for Bnum.
 
 ### List Of Differences
 
-The changes to the Enum code are fairly minor:
+The changes to the Enum code are all fairly minor:
 
 * Values can be implicit (Enum requires explicit values in the "class" form).
 
@@ -290,6 +290,8 @@ The changes to the Enum code are fairly minor:
 * Aliases must be explicitly enabled.
 
 * The default `__str__` implementation displays the value.
+
+* Ordering is by value.
 
 * The functional form is not supported.
 
