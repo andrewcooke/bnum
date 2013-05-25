@@ -1,9 +1,9 @@
 
-A Better Enum For Python 3
-==========================
+A Slightly Better Enum For Python 3
+===================================
 
 Bnum is an enumeration class for Python 3.  It tries to be broadly compatible
-with the standard Enum, but has been tweaked slightly to address the issues
+with the standard Enum, but has been tweaked to address issues identified
 in a [rant](http://www.acooke.org/cute/Pythonssad0.html) I wrote some time
 ago.
 
