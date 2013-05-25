@@ -7,7 +7,7 @@ Bnum is an enumeration class for Python 3.  It is broadly compatible with the
 the same code), but has been tweaked to address issues identified in a
 [rant](http://www.acooke.org/cute/Pythonssad0.html) I wrote some time ago.
 
-* [Quick Start]
+* [Quick Start](#quick-start)
 * [Basic Use](#basic-use)
    * [Names](#names)
    * [Values](#values)
