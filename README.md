@@ -1,8 +1,8 @@
 A Better Enum For Python 3
 ==========================
 
-* Auto-generated toc:
-{:toc}
+* [Basic Use](#basic-use)
+   * [Names](#names)
 
 Basic Use
 ---------
