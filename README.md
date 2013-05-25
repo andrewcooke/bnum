@@ -74,8 +74,8 @@ red
 <class str>
 ```
 
-If you have a name (as a string) then the appropriate instance can be
-retrieved by calling the class:
+If you have a value then the appropriate instance can be retrieved by calling
+the class:
 
 ```python
 >>> Colour('red') is Colour.red
