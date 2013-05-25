@@ -169,12 +169,10 @@ you can get the appropriate instance by calling the class:
 ```python
 >>> Colour('red') is Colour.red  # default is to use the value
 True
->>> repr(Emphasis(2))
-Emphasis(value=2, name='italic')
->>> repr(Emphasis(name='italic'))
-Emphasis(value=2, name='italic')
->>> Emphasis(name='italic')
-Emphasis(value=2, name='italic')
+>>> Emphasis(2) is Emphasis.italic
+True
+>>> Emphasis(name='italic') is Emphasis(value=2, name='italic') is Emphasis.italic
+True
 >>> Emphasis(value=3, name='italic')
 Error: blah blah
 ```
