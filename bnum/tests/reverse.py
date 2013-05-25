@@ -38,3 +38,20 @@ class IterTest(TestCase):
     def test_iter(self):
         assert list(Iter) == [1,2,3]
 
+
+
+class Int:
+
+    def __init__(self, x):
+        self.x = x
+
+    def __int__(self):
+        return self.x
+
+
+class IntTest(TestCase):
+
+    def test_int(self):
+        a = Int(1)
+        b = Int(2)
+        assert int(a) + int(b) == 3

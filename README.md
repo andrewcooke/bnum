@@ -7,6 +7,7 @@ Bnum is an enumeration class for Python 3.  It is broadly compatible with the
 the same code), but has been tweaked to address issues identified in a
 [rant](http://www.acooke.org/cute/Pythonssad0.html) I wrote some time ago.
 
+* [Quick Start]
 * [Basic Use](#basic-use)
    * [Names](#names)
    * [Values](#values)
@@ -21,6 +22,41 @@ the same code), but has been tweaked to address issues identified in a
    * [List Of Differences](#list-of-differences)
    * [Philosophy](#philosophy)
 * [Credits](#credits)
+
+Quick Start
+-----------
+
+```bash
+easy_install bnum
+```
+
+If you just need a set of names:
+
+```python
+>>> from bnum import Bnum
+>>> class Colour(Bnum):
+...     red
+...     green
+...     blue
+...
+>>> for colour in Colour: print(colour)
+blue
+green
+red
+```
+
+If you want integers from 1:
+
+```python
+>>> from bnum import Bnum, from_one
+>>> class Numbers(int, Bnum, values=from_one):
+...     one
+...     two
+...     seven = 7
+...
+>>> Numbers.one + Numbers.seven
+8
+```
 
 Basic Use
 ---------
@@ -250,8 +286,8 @@ achieved by adding the required type (typically `int` as a mixin):
 2
 ```
 
-This works by constructing the given type from the value.  So you will see
-errors if you mix incompatible types:
+This works by constructing the given type from the value (use a tuple for
+multiple arguments).  You will see errors if you mix incompatible types:
 
 ```python
 >>> class Confused(int, Bnum):
