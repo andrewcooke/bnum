@@ -210,9 +210,7 @@ By default, it is an error to repeat a value, because mixing implicit and
 explicit values could give very confusing bugs.  You can disable this safety
 check by setting `allow_aliases=True`.
 
-Aliases are valid instances, but are not listed or retrieved (frankly, I think
-they're a mistake, but Bnum provides them to help inter-operate with Python's
-Enum):
+Aliases are valid instances, but are not listed or retrieved:
 
 ```python
 >>> class Error(Bnum, values=from_one):
