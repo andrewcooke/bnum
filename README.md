@@ -3,6 +3,12 @@ A Better Enum For Python 3
 
 * [Basic Use](#basic-use)
    * [Names](#names)
+   * [Values](#values)
+   * [Retrieving Instances](#retrieving-instances)
+   * [Ordering](#ordering)
+   * [Aliases](#aliases)
+   
+
 
 Basic Use
 ---------
