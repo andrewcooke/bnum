@@ -17,6 +17,9 @@ the same code), but has been tweaked to address issues identified in a
    * [Inheritance](#inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
 * [Comparison With Enum](#comparison-with-enum)
+   * [Background](#background)
+   * [List Of Differences](#list-of-differences)
+   * [Philosophy](#philosophy)
 * [Credits](#credits)
 
 Basic Use
@@ -263,13 +266,50 @@ construct an integer.
 Comparison with Enum
 --------------------
 
-Python has an official Enum type, described ...
+### Background
 
-Differences:
+Python has an official Enum type,
+[described in PEP 435](http://www.python.org/dev/peps/pep-0435/).  The code
+used to implement that is
+[currently on BitBucket](https://bitbucket.org/stoneleaf/ref435) and was
+used as the basis for Bnum.
 
-* Something
+### List Of Differences
 
-Summary.
+The changes to the Enum code are fairly minor:
+
+* Values can be implicit (Enum requires explicit values in the "class" form).
+
+* The default implicit value is the name.
+
+* Alternative implicit values are defined via `values` (Enum numbers from 1
+  in the "functional" form).
+
+* Instances can be retrieved by name or value when calling the class.
+
+* Aliases must be explicitly enabled.
+
+* The default `__str__` implementation displays the value.
+
+* The functional form is not supported.
+
+In addition, I debated whether to support inheritance for a long time.
+
+### Philosophy
+
+As with most designs, many choices are inter-linked; getting a consistent
+set of choices is analogous to a local maximum in the "design space".  I think
+you could characterise the Enum design as one driven by the idea that
+enumerations are natural numbers (perhaps reflecting a C or Java influence).
+In contrast, I started from the idea that the simplest enumerations are
+distinct names.
+
+That basic difference, plus a general desire for consistency, probably
+explains almost all changes.  Evidence for this, I think, can be seen in
+[this discussion](http://bugs.python.org/issue17961) and my design can
+be seen as a reply to that: `__str__` is not arbitrary, but a type conversion
+(like `__int__`); the thing that is being converted is the value; the most
+natural value is the name.
 
 Credits
 -------
