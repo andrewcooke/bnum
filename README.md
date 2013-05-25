@@ -137,13 +137,11 @@ Using `values=bits` provides bit fields:
 ...
 >>> Emphasis.underline.value
 1
->>> type(Emphasis.underline.value)
-<class int>
 >>> Emphasis.bold.value
 4
 >>> Emphasis.bold.name
 bold
->>> 2 & (Emphasis.italic | Emphasis.bold)
+>>> 2 & (Emphasis.italic | Emphasis.bold)  # this can be made to work - see later
 TypeError: blah, blah
 ```
 
