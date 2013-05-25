@@ -301,8 +301,8 @@ As with most designs, many choices are inter-linked; getting a consistent
 set of choices is analogous to a local maximum in the "design space".  I think
 you could characterise the Enum design as one driven by the idea that
 enumerations are natural numbers (perhaps reflecting a C or Java influence).
-In contrast, I started from the idea that the simplest enumerations are
-distinct names.
+In contrast, I started from the idea that the simplest enumeration is a set
+of names.
 
 That basic difference, plus a general desire for consistency, probably
 explains almost all changes.  Evidence for this, I think, can be seen in
