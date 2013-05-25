@@ -1,6 +1,9 @@
 A Better Enum For Python 3
 ==========================
 
+* Auto-generated toc:
+{:toc}
+
 Basic Use
 ---------
 
