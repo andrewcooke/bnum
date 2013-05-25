@@ -179,12 +179,11 @@ Error: blah blah
 
 ### Ordering
 
-Values are used in expressions - like comparison - using instances.  So
-if you sort a list of instances they will be sorted by value.  This is the
-same ordering that is used when iterating over the instances of a Bnum.
+Instances are ordered by value.
 
 Since the default value is the name itself, the default ordering when iterating
-over a Bnum is alphabetical (from comparison of the `str` values).
+over a Bnum is alphabetical (from comparison of the values, which are names, as
+strings).
 
 ```python
 >>> list(Colour)
