@@ -17,6 +17,7 @@ the same code), but has been tweaked to address issues identified in a
    * [Inheritance](#inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
 * [Comparison With Enum](#comparison-with-enum)
+* [Credits](#credits)
 
 Basic Use
 ---------
@@ -227,6 +228,38 @@ OK(name='a', value=1)
 [1]  # TODO - check the correct output here; maybe len() would be better?
 ```
 
+Advanced Use
+------------
+
+### Inheritance
+
+It can sometimes be useful to have enumerations that *are* their value,
+because then you can use the instance directly in expressions.  This can be
+achieved by adding the required type (typically `int` as a mixin):
+
+```python
+>>> class IntEmphasis(int, Bnum, values=bits):
+...     underline
+...     italic
+...     bold
+...
+>>> 2 & (IntEmphasis.underline | IntEmphasis.italic)
+2
+```
+
+This works by constructing the given type from the value.  So you will see
+errors if you mix incompatible types:
+
+```python
+>>> class Confused(int, Bnum):
+...     string
+...
+Error: blah, blah
+````
+
+Here the default value is the name, which a string, which cannot be used to
+construct an integer.
+
 Comparison with Enum
 --------------------
 
@@ -237,3 +270,10 @@ Differences:
 * Something
 
 Summary.
+
+Credits
+-------
+
+Despite my intemperate language in the rant, this work would not have been
+possible without the prior work of those who developed Enum (I learnt a lot
+from trying to understand that code).
