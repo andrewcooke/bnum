@@ -1,5 +1,3 @@
-A Better Enum For Python 3
-==========================
 
 * [Basic Use](#basic-use)
    * [Names](#names)
@@ -7,8 +5,14 @@ A Better Enum For Python 3
    * [Retrieving Instances](#retrieving-instances)
    * [Ordering](#ordering)
    * [Aliases](#aliases)
-   
+* [Advanced Use](#advanced-use)
+   * [Inheritance](#inheritance)
+   * [Calculating Implicit Values](#calculating-implicit-values)
+* [Comparison With Enum](#comparison-with-enum)
 
+
+A Better Enum For Python 3
+==========================
 
 Basic Use
 ---------
@@ -154,12 +158,6 @@ undefined:
 
 The only value you cannot have is `None`, which will be treated as missing
 and replaced by an implicit value.
-
-Finally, you can implement support for alternative implicit values:
-
-```python
-TODO
-```
 
 ### Retrieving Instances
 
