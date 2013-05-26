@@ -336,7 +336,7 @@ some other flag value) for names that do not exist.  While that works fine in
 simple cases it shadows any global references (which are first resolved against
 class scope and then, on failure, against the surrounding scope).
 
-The only related solutions I can see are:
+The only solutions I can see are:
 
 1. Use a special value
 1. Use a special format for names
