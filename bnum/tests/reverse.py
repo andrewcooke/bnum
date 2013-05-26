@@ -1,4 +1,5 @@
-
+from collections import defaultdict
+from itertools import count
 from unittest import TestCase
 
 '''
@@ -55,3 +56,25 @@ class IntTest(TestCase):
         a = Int(1)
         b = Int(2)
         assert int(a) + int(b) == 3
+
+
+class AutoEnum(type):
+    @classmethod
+    def __prepare__(metacls, name, bases):
+        return defaultdict(count().__next__)
+    def __new__(cls, name, bases, classdict):
+        print(classdict)
+        print(classdict.keys())
+        result = type.__new__(cls, name, bases, dict(classdict))
+        return result
+
+class Enum(metaclass=AutoEnum): pass
+
+class TestAuto(TestCase):
+
+    def test_auto(self):
+        class MyClass(Enum):
+            a
+            b
+        assert MyClass.a == 1
+

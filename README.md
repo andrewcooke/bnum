@@ -45,7 +45,8 @@ green
 red
 ```
 
-If you want integers from 1:
+If you want integers from 1, and be able to use the enumeration value
+in expressions (the enumeration *is* an `int`)::
 
 ```python
 >>> from bnum import Bnum, from_one
@@ -56,6 +57,8 @@ If you want integers from 1:
 ...
 >>> Numbers.one + Numbers.seven
 8
+>>> isinstance(Number.two, int)
+True
 ```
 
 Basic Use
@@ -86,6 +89,8 @@ True
 red
 >>> repr(Colour.red)
 Colour('red')
+>>> Colour.red  # this is the value - see below
+red
 ```
 
 And the class itself behaves as a collection of the instances it contains:
