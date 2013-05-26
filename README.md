@@ -348,6 +348,8 @@ The first, with ellipses, is what Enum uses for its auto-numbering (currently
 undocumented, but visible in the source) and it seems better than the
 alternatives.
 
+A restricted scope
+
 ```python
 >>> class Colour(Bnum):
 ...     with values(from_one):
