@@ -349,12 +349,8 @@ names.
 As with most designs, many choices are inter-linked; getting a consistent
 set of choices is analogous to a local maximum in the "design space".
 So the change in emphasis from values to names, plus a general desire for
-consistency, probably explains almost all changes.  Evidence for this, I think,
-can be seen in [this discussion](http://bugs.python.org/issue17961) and my
-design can be seen as a reply to that: `__str__` is not arbitrary, but
-a type conversion (like `__int__`); if we emphasise names, but want to keep
-compatibility with Enum, then the simplest solution is to use names as the
-default value.
+consistency (both internal and between Bnum and Enum), probably explains
+almost all changes (and non-changes).
 
 Credits
 -------
