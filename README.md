@@ -363,6 +363,39 @@ So the change in emphasis from values to names, plus a general desire for
 consistency (both internally, and between Bnum and Enum), explains most
 changes (and non-changes).
 
+### Things You Can Do With Bnum (That You Cannot with Enum)
+
+Have a simple list of names in "class" form:
+
+```python
+>>> class Colour(Bnum):
+...     red
+...     green
+...     blue
+```
+
+Detect a stupid mistake:
+
+```python
+>>> class Error(Bnum, values=from_one):
+...     one
+...     two
+...     three = 2
+...
+Error: blah, blah
+```
+
+Define bit fields:
+
+```python
+>>> class IntEmphasis(int, Bnum, values=bits):
+...     underline
+...     italic
+...     bold
+...
+>>> allowed_styles = IntEmphasis.italic | IntEmphasis.bold
+```
+
 Credits
 -------
 
