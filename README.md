@@ -334,7 +334,7 @@ Changes to the Enum semantics include:
 
 * ordering is by value;
 
-* the functional form is not supported.
+* the "functional" form is not supported.
 
 In addition, I debated for a long time whether to support inheritance.  It is
 an awfully complicated way to avoid typing `.value`.
