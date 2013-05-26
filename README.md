@@ -36,7 +36,8 @@ Quick Start
 easy_install bnum
 ```
 
-If you just need a set of names (the `...` are typed just like that):
+If you just need a set of names (the `...` are typed just like that - see
+[FAQ](#why-the-ellipses)):
 
 ```python
 >>> from bnum import Bnum
