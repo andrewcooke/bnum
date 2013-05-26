@@ -341,7 +341,7 @@ Changes to the Enum semantics include:
 
 * the "functional" form is not supported (please email me,
   [andrew@acooke.org](mailto:andrew@acooke.org),
-  if you think something like this is important, explaining your use case).
+  if you think something like this is important).
 
 In addition, I debated for a long time whether to support multiple inheritance.
 It is an awfully complicated way to avoid typing `.value`.
