@@ -341,14 +341,13 @@ an awfully complicated way to avoid typing `.value`.
 
 ### Philosophy
 
-I think you could characterise the Enum design as one driven by the idea that
-enumerations are natural numbers (perhaps reflecting a C or Java influence).
-In contrast, I started from the idea that the simplest enumeration is a set
-of names.
+You could characterise the Enum design as one driven by "enumerations are
+natural numbers" (perhaps reflecting a C or Java influence).  In contrast,
+I started from the idea that the simplest enumeration is a set of names.
 
 As with most designs, many choices are inter-linked; getting a consistent
 set of choices is analogous to a local maximum in the "design space".
-So change in emphasis from numbers to names, plus a general desire for
+So the change in emphasis from numbers to names, plus a general desire for
 consistency, probably explains almost all changes.  Evidence for this, I think,
 can be seen in [this discussion](http://bugs.python.org/issue17961) and my
 design can be seen as a reply to that: `__str__` is not arbitrary, but
