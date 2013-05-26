@@ -329,7 +329,7 @@ Changes to the Enum semantics include:
 * the default implicit value is the name;
 
 * alternative implicit values are defined via `values` (Enum numbers from 1
-  in the "functional" form);
+  in the "functional" form, equivalent to `values=from_one`);
 
 * instances can be retrieved by name or value when calling the class;
 
@@ -339,7 +339,8 @@ Changes to the Enum semantics include:
 
 * ordering is by value;
 
-* the "functional" form is not supported.
+* the "functional" form is not supported (please [email me](andrew@acooke.org)
+  if you think something like this is important, explaining your use case).
 
 In addition, I debated for a long time whether to support multiple inheritance.
 It is an awfully complicated way to avoid typing `.value`.
