@@ -22,6 +22,7 @@ the same code), but has been tweaked to address issues identified in a
    * [Background](#background)
    * [List Of Differences](#list-of-differences)
    * [Philosophy](#philosophy)
+   * [Things You Can Do With Bnum (That You Can't Do With Enum)](#things-you-can-do-with-bnum-that-you-cant-do-with-enum)
 * [Credits](#credits)
 
 Quick Start
