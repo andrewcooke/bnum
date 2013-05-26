@@ -337,8 +337,7 @@ The changes to the Enum code are all fairly minor:
 * The functional form is not supported.
 
 In addition, I debated whether to support inheritance for a long time.  It is
-an awfully complicated way to avoid typing `.value`.  But compatibility with
-Enum is important.
+an awfully complicated way to avoid typing `.value`.
 
 ### Philosophy
 
