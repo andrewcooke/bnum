@@ -15,7 +15,7 @@ the same code), but has been tweaked to address issues identified in a
    * [Ordering](#ordering)
    * [Aliases](#aliases)
 * [Advanced Use](#advanced-use)
-   * [Inheritance](#inheritance)
+   * [Multiple Inheritance](#multiple-inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
@@ -191,7 +191,7 @@ TypeError: blah, blah
 ```
 
 To make the final line work as you might expect, see the
-[section on inheritance](#inheritance) below.
+[section on multiple inheritance](#multiple-inheritance) below.
 
 You can even mix value types, although it may make the [ordering](#Ordering)
 undefined:
@@ -275,7 +275,7 @@ OK(name='a', value=1)
 Advanced Use
 ------------
 
-### Inheritance
+### Multiple Inheritance
 
 It can sometimes be useful to have enumerations that *are* their value,
 because then you can use the instance directly in expressions.  This can be
@@ -289,6 +289,10 @@ achieved by adding the required type (typically `int` as a mixin):
 ...
 >>> 2 & (IntEmphasis.underline | IntEmphasis.italic)
 2
+>>> isinstance(IntEmphasis.underline, Bnum)
+True
+>>> isinstance(IntEmphasis.underline, int)
+True
 ```
 
 This works by constructing the given type from the value (use a tuple for
@@ -336,8 +340,8 @@ Changes to the Enum semantics include:
 
 * the "functional" form is not supported.
 
-In addition, I debated for a long time whether to support inheritance.  It is
-an awfully complicated way to avoid typing `.value`.
+In addition, I debated for a long time whether to support multiple inheritance.
+It is an awfully complicated way to avoid typing `.value`.
 
 ### Philosophy
 
