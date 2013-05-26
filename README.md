@@ -53,7 +53,7 @@ red
 ```
 
 If you want integers from 1, and the ability to use enumeration values
-in expressions (so the enumeration *is* an `int`)::
+in expressions (so the enumeration *is* an `int`):
 
 ```python
 >>> from bnum import Bnum, from_one
@@ -339,7 +339,7 @@ class scope and then, on failure, against the surrounding scope).
 
 The only solutions I can see are:
 
-1. Use a special value
+1. Use a special (explicit) value
 1. Use a special format for names
 1. Use strings rather than identifiers
 
