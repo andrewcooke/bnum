@@ -20,7 +20,7 @@ identified in a
 * [Advanced Use](#advanced-use)
    * [Multiple Inheritance](#multiple-inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
-* [FAQ]
+* [FAQ](#faq)
    * [Why The Ellipses?](#why-the-ellipses)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
