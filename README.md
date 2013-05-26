@@ -344,6 +344,10 @@ Changes to the Enum semantics include:
 In addition, I debated for a long time whether to support multiple inheritance.
 It is an awfully complicated way to avoid typing `.value`.
 
+Note that most of these are related to the *definition* of enumerations.
+So changing from Enum to Bnum will often require changing only one part of
+the code base.
+
 ### Philosophy
 
 You could characterise the Enum design as one driven by enumerations as
