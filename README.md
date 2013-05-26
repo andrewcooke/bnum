@@ -317,7 +317,7 @@ used as the basis for Bnum.
 
 ### List Of Differences
 
-The changes to the Enum semantics are:
+Changes to the Enum semantics include:
 
 * values can be implicit (Enum requires explicit values in the "class" form);
 
