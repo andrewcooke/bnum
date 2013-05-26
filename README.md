@@ -319,7 +319,7 @@ FAQ
 
 ### Why The Ellipses?
 
-Why not:
+Why not use
 
 ```python
 >>> class Colour(Bnum):
@@ -328,7 +328,8 @@ Why not:
 ...     blue
 ```
 
-[as described by Duncan Booth](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)?
+as [described](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)
+by Duncan Booth?
 
 Unfortunately, this requires the class dictionary to supply `None` (or
 some other flag value) for names that do not exist.  While that works fine in
@@ -337,9 +338,9 @@ class scope and then, on failure, against the surrounding scope).
 
 The only related solutions I can see are:
 
-#. Use a special value
-#. Use a special format for names
-#. Use strings rather than identifiers
+  #. Use a special value
+  #. Use a special format for names
+  #. Use strings rather than identifiers
 
 The first, with ellipses, is what Enum uses for its auto-numbering (currently
 undocumented, but visible in the source) and it seems better than the
