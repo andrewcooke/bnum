@@ -348,6 +348,17 @@ The first, with ellipses, is what Enum uses for its auto-numbering (currently
 undocumented, but visible in the source) and it seems better than the
 alternatives.
 
+```python
+>>> class Colour(Bnum):
+...     with values(from_one):
+...         red
+...         green
+...         blue
+```
+
+can isolate the problem to a smaller region of the class, but still has
+problems with globals used to define enumeration values.
+
 Comparison with Enum
 --------------------
 
