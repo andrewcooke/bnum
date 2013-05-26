@@ -319,22 +319,22 @@ used as the basis for Bnum.
 
 The changes to the Enum semantics are:
 
-* Values can be implicit (Enum requires explicit values in the "class" form).
+* values can be implicit (Enum requires explicit values in the "class" form);
 
-* The default implicit value is the name.
+* the default implicit value is the name;
 
-* Alternative implicit values are defined via `values` (Enum numbers from 1
-  in the "functional" form).
+* alternative implicit values are defined via `values` (Enum numbers from 1
+  in the "functional" form);
 
-* Instances can be retrieved by name or value when calling the class.
+* instances can be retrieved by name or value when calling the class;
 
-* Aliases must be explicitly enabled.
+* aliases must be explicitly enabled;
 
-* The default `__str__` implementation displays the value.
+* the default `__str__` implementation displays the value;
 
-* Ordering is by value.
+* ordering is by value;
 
-* The functional form is not supported.
+* the functional form is not supported.
 
 In addition, I debated for a long time whether to support inheritance.  It is
 an awfully complicated way to avoid typing `.value`.
