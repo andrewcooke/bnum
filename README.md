@@ -351,7 +351,7 @@ set of choices is analogous to a local maximum in the "design space".
 So change in emphasis from numbers to names, plus a general desire for
 consistency, probably explains almost all changes.  Evidence for this, I think,
 can be seen in [this discussion](http://bugs.python.org/issue17961) and my
-design can be seen as a reply to that: for me, `__str__` is not arbitrary, but
+design can be seen as a reply to that: f`__str__` is not arbitrary, but
 a type conversion (like `__int__`); the thing that is being converted is the
 value; the most natural value is the name.
 
