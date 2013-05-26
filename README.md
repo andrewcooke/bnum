@@ -20,6 +20,8 @@ identified in a
 * [Advanced Use](#advanced-use)
    * [Multiple Inheritance](#multiple-inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
+* [FAQ]
+   * [Why The Ellipses?](#why-the-ellipses)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
    * [List Of Differences](#list-of-differences)
@@ -34,14 +36,14 @@ Quick Start
 easy_install bnum
 ```
 
-If you just need a set of names:
+If you just need a set of names (the `...` are typed just like that):
 
 ```python
 >>> from bnum import Bnum
 >>> class Colour(Bnum):
-...     red
-...     green
-...     blue
+...     red = ...
+...     green = ...
+...     blue = ...
 ...
 >>> for colour in Colour: print(colour)
 blue
@@ -55,8 +57,8 @@ in expressions (so the enumeration *is* an `int`)::
 ```python
 >>> from bnum import Bnum, from_one
 >>> class Numbers(int, Bnum, values=from_one):
-...     one
-...     two
+...     one = ...
+...     two = ...
 ...     seven = 7
 ...
 >>> Numbers.one + Numbers.seven
@@ -74,9 +76,9 @@ At its simplest, a Bnum defines a collection of distinct names:
 
 ```python
 >>> class Colour(Bnum):
-...     red
-...     green
-...     blue
+...     red = ...
+...     green = ...
+...     blue = ...
 ```
 
 These can be tested for equality, are instances of the class on which they
@@ -156,13 +158,13 @@ also a `from_zero` that, yes, you guessed right):
 
 ```python
 >>> class Weekday(Bnum, values=from_one):
-...     monday
-...     tuesday
-...     wednesday
-...     thursday
-...     friday
-...     saturday
-...     sunday
+...     monday = ...
+...     tuesday = ...
+...     wednesday = ...
+...     thursday = ...
+...     friday = ...
+...     saturday = ...
+...     sunday = ...
 ...
 >>> Weekday.sunday.name
 sunday
@@ -180,9 +182,9 @@ Using `values=bits` provides bit fields:
 
 ```python
 >>> class Emphasis(Bnum, values=bits):
-...     underline
-...     italic
-...     bold
+...     underline = ...
+...     italic = ...
+...     bold = ...
 ...
 >>> Emphasis.underline.value
 1
@@ -263,11 +265,11 @@ Aliases are valid instances, but are not listed or retrieved:
 
 ```python
 >>> class Error(Bnum, values=from_one):
-...     a
+...     a = ...
 ...     b = 1  # an error
 Error: blah blah
 >>> class OK(Bnum, values=from_one, allow_aliases=True):
-...     a
+...     a = ...
 ...     b = 1  # an alias
 ...
 >>> repr(OK('b'))
@@ -287,9 +289,9 @@ achieved by adding the required type (typically `int` as a mixin):
 
 ```python
 >>> class IntEmphasis(int, Bnum, values=bits):
-...     underline
-...     italic
-...     bold
+...     underline = ...
+...     italic = ...
+...     bold = ...
 ...
 >>> 2 & (IntEmphasis.underline | IntEmphasis.italic)
 2
@@ -304,13 +306,44 @@ multiple arguments).  You will see errors if you mix incompatible types:
 
 ```python
 >>> class Confused(int, Bnum):
-...     string
+...     string = ...
 ...
 Error: blah, blah
 ````
 
 Here the default value is the name, which a string, which cannot be used to
 construct an integer.
+
+FAQ
+---
+
+### Why The Ellipses?
+
+Why not:
+
+```python
+>>> class Colour(Bnum):
+...     red
+...     green
+...     blue
+```
+
+[as described by Duncan Booth](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)?
+
+Unfortunately, this requires the class dictionary to supply `None` (or
+some other flag value) for names that do not exist.  While that works fine in
+simple cases it shadows any global references (which are first resolved against
+class scope and then, on failure, against the surrounding scope).
+
+The only related solutions I can see are:
+
+#. Use a special value
+#. Use a special format for names
+#. Use strings rather than identifiers
+
+The first, with ellipses, is what Enum uses for its auto-numbering (currently
+undocumented, but visible in the source) and it seems better than the
+alternatives.
 
 Comparison with Enum
 --------------------
