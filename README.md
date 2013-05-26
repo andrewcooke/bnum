@@ -45,8 +45,8 @@ green
 red
 ```
 
-If you want integers from 1, and be able to use the enumeration value
-in expressions (the enumeration *is* an `int`)::
+If you want integers from 1, and the ability to use enumeration values
+in expressions (so the enumeration *is* an `int`)::
 
 ```python
 >>> from bnum import Bnum, from_one
