@@ -363,7 +363,7 @@ So the change in emphasis from values to names, plus a general desire for
 consistency (both internally, and between Bnum and Enum), explains most
 changes (and non-changes).
 
-### Things You Can Do With Bnum (That You Cannot with Enum)
+### Things You Can Do With Bnum (That You Can't Do With Enum)
 
 Have a simple list of names in "class" form:
 
