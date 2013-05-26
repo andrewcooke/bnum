@@ -357,4 +357,4 @@ Credits
 
 Despite my intemperate language in the rant, this work would not have been
 possible without the prior work of those who developed Enum (I learnt a lot
-from trying to understand that code).
+trying to understand that code).
