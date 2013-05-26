@@ -349,7 +349,7 @@ names.
 As with most designs, many choices are inter-linked; getting a consistent
 set of choices is analogous to a local maximum in the "design space".
 So the change in emphasis from values to names, plus a general desire for
-consistency (both internal and between Bnum and Enum), probably explains
+consistency (both internally, and between Bnum and Enum), probably explains
 almost all changes (and non-changes).
 
 Credits
