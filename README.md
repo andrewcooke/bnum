@@ -341,7 +341,8 @@ The only solutions I can see are:
 
 1. use a special (explicit) value;
 1. use a special format for names;
-1. use strings rather than identifiers.
+1. use strings rather than identifiers;
+1. use a function to introduce names.
 
 The first, with ellipses, is what Enum uses for its auto-numbering (currently
 undocumented, but visible in the source) and it seems better than the
