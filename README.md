@@ -207,11 +207,11 @@ undefined:
 >>> class Strange(Bnum):
 ...     foo = 42
 ...     bar = 'fish'
-...     baz  # = 'baz' - implicitly the name, since no values argument given
+...     baz = ...  # implicitly the name, since no values argument given
 ```
 
-The only value you cannot have is `None`, which will be treated as missing
-and replaced by an implicit value.
+The only value you cannot have is `...` (ellipsis), which will be treated as
+missing and replaced by an implicit value.
 
 ### Retrieving Instances
 
