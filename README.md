@@ -376,7 +376,9 @@ used as the basis for Bnum.
 
 Changes to the Enum semantics include:
 
-* values can be implicit (Enum requires explicit values in the "class" form);
+* values can be implicit (Enum requires explicit values in the "class" form,
+  although there's undocumented support for this - see `auto_enum` in the
+  tests);
 
 * the default implicit value is the name;
 
