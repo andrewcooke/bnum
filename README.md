@@ -423,17 +423,17 @@ Have a simple list of names in "class" form:
 
 ```python
 >>> class Colour(Bnum):
-...     red
-...     green
-...     blue
+...     red = ...
+...     green = ...
+...     blue = ...
 ```
 
 Detect a stupid mistake:
 
 ```python
 >>> class Error(Bnum, values=from_one):
-...     one
-...     two
+...     one = ...
+...     two = ...
 ...     three = 2
 ...
 Error: blah, blah
@@ -443,9 +443,9 @@ Define bit fields:
 
 ```python
 >>> class IntEmphasis(int, Bnum, values=bits):
-...     underline
-...     italic
-...     bold
+...     underline = ...
+...     italic = ...
+...     bold = ...
 ...
 >>> allowed_styles = IntEmphasis.italic | IntEmphasis.bold
 ```
