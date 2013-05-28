@@ -40,11 +40,11 @@ If you just need a set of names (the `...` are typed just like that - see
 [FAQ](#why-the-ellipses)):
 
 ```python
->>> from bnum import Bnum
->>> class Colour(Bnum):
-...     red = ...
-...     green = ...
-...     blue = ...
+>>> from bnum import ImplicitBnum
+>>> class Colour(ImplicitBnum):
+...     red
+...     green
+...     blue
 ...
 >>> for colour in Colour: print(colour)
 blue
@@ -52,46 +52,17 @@ green
 red
 ```
 
-```python
->>> from bnum import Bnum
->>> class Colour(Bnum):
-...     with auto():
-...         red
-...         green
-...         blue
-...
->>> for colour in Colour: print(colour)
-blue
-green
-red
-```
-
-If you want integers from 1, and the ability to use enumeration values
-in expressions (so the enumeration *is* an `int`):
+If you want integers from 1, explicit values, and the ability to use
+enumeration values in expressions (so the enumeration *is* an `int`):
 
 ```python
->>> from bnum import Bnum, from_one
->>> class Numbers(int, Bnum, values=from_one):
-...     one = ...
-...     two = ...
-...     seven = 7
-...
->>> Numbers.one + Numbers.seven
-8
->>> isinstance(Number.two, int)
-True
-```
-
-```python
->>> from bnum import Bnum, from_one
->>> class Numbers(int, Bnum):
-...     with auto(from_one):
+>>> from bnum import ExplicitBnum, from_one
+>>> class Numbers(int, ExplicitBnum, values=from_one):
+...     with implicit:
 ...         one
 ...         two
-...     seven = 7
+...     three = one + two
 ...
->>> Numbers.one + Numbers.seven
-8
 >>> isinstance(Number.two, int)
 True
 ```
