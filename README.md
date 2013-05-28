@@ -52,6 +52,20 @@ green
 red
 ```
 
+```python
+>>> from bnum import Bnum
+>>> class Colour(Bnum):
+...     with auto():
+...         red
+...         green
+...         blue
+...
+>>> for colour in Colour: print(colour)
+blue
+green
+red
+```
+
 If you want integers from 1, and the ability to use enumeration values
 in expressions (so the enumeration *is* an `int`):
 
@@ -60,6 +74,20 @@ in expressions (so the enumeration *is* an `int`):
 >>> class Numbers(int, Bnum, values=from_one):
 ...     one = ...
 ...     two = ...
+...     seven = 7
+...
+>>> Numbers.one + Numbers.seven
+8
+>>> isinstance(Number.two, int)
+True
+```
+
+```python
+>>> from bnum import Bnum, from_one
+>>> class Numbers(int, Bnum, values=from_one):
+...     with auto(bits()):
+...         one =
+...         two =
 ...     seven = 7
 ...
 >>> Numbers.one + Numbers.seven
