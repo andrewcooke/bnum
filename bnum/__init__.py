@@ -3,17 +3,17 @@ from collections import OrderedDict
 from enum import dunder, break_noisily_on_pickle
 
 '''
-Based on Enum code, (c) 2013 Ethan Furman, ethan@stoneleaf.us
+Based on Enum, (c) 2013 Ethan Furman, ethan@stoneleaf.us
 Modifications (c) 2013 Andrew Cooke, andrew@acooke.org
 '''
 
 
-__all__ = ['Bnum']
+__all__ = ['ImplicitBnum', 'ExplicitBnum']
 
 
 # this is needed because BnumMeta runs twice - once to create Bnum and
 # once to create the Bnum subclass.  On the first run, Bnum doesn't exist.
-Bnum = None
+Bnum ,ImplicitBnum, ExplicitBnum = None, None, None
 
 
 class BnumDict(OrderedDict):
@@ -23,10 +23,24 @@ class BnumDict(OrderedDict):
     recorded.  OrderedDict allows implicit values to be ordered correctly.
     '''
 
+    def __init__(self, implicit=False):
+        super().__init__()
+        self.implicit = implicit
+
+    def __enter__(self):
+        self.implicit = True
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.implicit = False
+
     def __getitem__(self, item):
         '''Provide a default value of None.'''
-        if item not in self:
-            self[item] = None
+        if self.implicit:
+            if item not in self:
+                self[item] = None
+        else:
+            if item == 'implicit':
+                return self
         return super().__getitem__(item)
 
 
@@ -46,10 +60,6 @@ class BnumMeta(type):
     provides a dictionary.  Second (after the class has been evaluated),
     __new__ constructs the class.
     '''
-
-    @classmethod
-    def __prepare__(metacls, cls, bases):
-        return BnumDict()
 
     def __new__(metacls, cls, bases, classdict,
                 values=names, allow_aliases=False):
@@ -113,6 +123,9 @@ class BnumMeta(type):
                 enums_by_name[name] = enum_item
             enums_by_value[enum_item.value] = enum_item
 
+        print('by names', enums_by_name)
+        print('by value', enums_by_value)
+
         # more pickle-related logic from Enum
         for name in ('__repr__', '__str__', '__getnewargs__'):
             class_method = getattr(enum_class, name)
@@ -124,6 +137,14 @@ class BnumMeta(type):
             if save_new:
                 enum_class.__new_member__ = __new__
             enum_class.__new__ = Bnum.__new__
+
+        enum_class._enums_by_value = enums_by_value
+        try:
+            enum_class._enums_by_name = \
+                OrderedDict((enums_by_value[value].name, enums_by_value[value])
+                            for value in sorted(enums_by_value.keys()))
+        except:
+            enum_class._enums_by_name = enums_by_name
 
         return enum_class
 
@@ -138,17 +159,17 @@ class BnumMeta(type):
                 enums[name] = value
         return enums, others
 
-    def __contains__(cls, enum_item):
-        return isinstance(enum_item, cls) and enum_item.name in cls._enum_map
-
-    def __dir__(self):
-        return ['__class__', '__doc__', '__members__'] + self._enum_names
-
-    @property
-    def __members__(cls):
-        """Returns a MappingProxyType of the internal _enum_map structure."""
-
-        return MappingProxyType(cls._enum_map)
+    # def __contains__(cls, enum_item):
+    #     return isinstance(enum_item, cls) and enum_item.name in cls._enum_map
+    #
+    # def __dir__(self):
+    #     return ['__class__', '__doc__', '__members__'] + self._enum_names
+    #
+    # @property
+    # def __members__(cls):
+    #     """Returns a MappingProxyType of the internal _enum_map structure."""
+    #
+    #     return MappingProxyType(cls._enum_map)
 
     def __getattr__(cls, name):
         """Return the enum member matching `name`
@@ -163,21 +184,21 @@ class BnumMeta(type):
         if dunder(name):
             raise AttributeError(name)
         try:
-            return cls._enum_map[name]
+            return cls._enums_by_name[name]
         except KeyError:
             raise AttributeError(name) from None
 
-    def __getitem__(cls, name):
-        return cls._enum_map[name]
+    # def __getitem__(cls, name):
+    #     return cls._enum_map[name]
 
     def __iter__(cls):
-        return (cls._enum_map[name] for name in cls._enum_names)
+        return (cls._enums_by_name[name] for name in cls._enums_by_name)
 
-    def __len__(cls):
-        return len(cls._enum_names)
-
-    def __repr__(cls):
-        return "<enum %r>" % cls.__name__
+    # def __len__(cls):
+    #     return len(cls._enum_names)
+    #
+    # def __repr__(cls):
+    #     return "<enum %r>" % cls.__name__
 
     @staticmethod
     def _get_mixins(bases):
@@ -195,9 +216,9 @@ class BnumMeta(type):
         # type has been mixed in so we can use the correct __new__
         obj_type = first_enum = None
         for base in bases:
-            if  (base is not Bnum and
-                     issubclass(base, Bnum) and
-                     base._enum_names):
+            if  base not in (Bnum, ImplicitBnum, ExplicitBnum) \
+                    and issubclass(base, Bnum) \
+                    and base._enum_names:
                 raise TypeError("Cannot extend enumerations")
             # base is now the last base in bases
         if not issubclass(base, Bnum):
@@ -267,34 +288,55 @@ class BnumMeta(type):
         return __new__, save_new, use_args
 
 
-class Bnum(metaclass=BnumMeta):
+class ImplicitBnumMeta(BnumMeta):
+
+    @classmethod
+    def __prepare__(metacls, cls, bases):
+        return BnumDict(implicit=True)
+
+
+class ExplicitBnumMeta(BnumMeta):
+
+    @classmethod
+    def __prepare__(metacls, cls, bases):
+        return BnumDict(implicit=False)
+
+
+
+
+class Bnum():
     """Valueless, unordered enumeration class"""
 
     # no actual assignments are made as it is a chicken-and-egg problem
     # with the metaclass, which checks for the Enum class specifically
 
     def __new__(cls, value):
-        # all enum instances are actually created during class construction
-        # without calling this method; this method is called by the metaclass'
-        # __call__ (i.e. Color(3) ), and by pickle
-        if type(value) is cls:
-            return value
-            # by-value search for a matching enum member
-        # see if it's in the reverse mapping (for hashable values)
-        if value in cls._enum_value_map:
-            return cls._enum_value_map[value]
-            # not there, now do long search -- O(n) behavior
-        for member in cls._enum_map.values():
-            if member.value == value:
-                return member
-        raise ValueError("%s is not a valid %s" % (value, cls.__name__))
+        return value
+
+        # # all enum instances are actually created during class construction
+        # # without calling this method; this method is called by the metaclass'
+        # # __call__ (i.e. Color(3) ), and by pickle
+        # if type(value) is cls:
+        #     return value
+        #     # by-value search for a matching enum member
+        # # see if it's in the reverse mapping (for hashable values)
+        # if value in cls._enum_value_map:
+        #     return cls._enum_value_map[value]
+        #     # not there, now do long search -- O(n) behavior
+        # for member in cls._enum_map.values():
+        #     if member.value == value:
+        #         return member
+        # raise ValueError("%s is not a valid %s" % (value, cls.__name__))
 
     def __repr__(self):
-        return "<%s.%s: %r>" % (
-            self.__class__.__name__, self._name, self._value)
+        if self._name == self._value:
+            return '%s(%r)' % (self.__class__.__name__, self._value)
+        else:
+            return "%s(value=%r, name=%r)" % \
+                   (self.__class__.__name__, self._value, self._name)
 
     def __str__(self):
-        return "%s.%s" % (self.__class__.__name__, self._name)
+        return str(self._value)
 
     def __dir__(self):
         return (['__class__', '__doc__', 'name', 'value'])
@@ -324,4 +366,15 @@ class Bnum(metaclass=BnumMeta):
     @property
     def value(self):
         return self._value
+
+
+class ImplicitBnum(Bnum, metaclass=ImplicitBnumMeta):
+
+    pass
+
+
+class ExplicitBnum(Bnum, metaclass=ExplicitBnumMeta):
+
+    pass
+
 

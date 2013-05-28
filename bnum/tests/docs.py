@@ -1,6 +1,6 @@
 
 from unittest import TestCase
-from bnum import Bnum
+from bnum import ImplicitBnum
 
 
 '''
@@ -8,11 +8,11 @@ Test all the assertions made in the documentation.
 '''
 
 
-class NameOnlyTest(TestCase):
+class QuickStartTest(TestCase):
 
     def test_colour(self):
 
-        class Colour(Bnum):
+        class Colour(ImplicitBnum):
             red
             green
             blue
@@ -23,3 +23,5 @@ class NameOnlyTest(TestCase):
         assert Colour.red.name == 'red', Colour.red.name
         assert str(Colour.red) == 'red'
         assert repr(Colour.red) == "Colour('red')", repr(Colour.red)
+        assert str(list(map(str, Colour))) == "['blue', 'green', 'red']", str(list(map(str, Colour)))
+
