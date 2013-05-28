@@ -86,8 +86,8 @@ True
 >>> from bnum import Bnum, from_one
 >>> class Numbers(int, Bnum):
 ...     with auto(from_one):
-...         one =
-...         two =
+...         one
+...         two
 ...     seven = 7
 ...
 >>> Numbers.one + Numbers.seven
