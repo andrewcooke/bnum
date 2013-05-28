@@ -85,7 +85,7 @@ True
 ```python
 >>> from bnum import Bnum, from_one
 >>> class Numbers(int, Bnum, values=from_one):
-...     with auto(bits()):
+...     with auto(from_one):
 ...         one =
 ...         two =
 ...     seven = 7
