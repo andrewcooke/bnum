@@ -52,7 +52,7 @@ red
 ```
 
 If you want integers from 1, explicit values, and the ability to use
-enumeration values in expressions (so the enumeration *is* an `int`):
+enumeration values in expressions:
 
 ```python
 >>> from bnum import ExplicitBnum, from_one
