@@ -56,7 +56,7 @@ enumeration values in expressions:
 
 ```python
 >>> from bnum import ExplicitBnum, from_one
->>> class Numbers(int, ExplicitBnum, values=from_one):
+>>> class Number(int, ExplicitBnum, values=from_one):
 ...     with implicit:
 ...         one
 ...         two

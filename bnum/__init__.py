@@ -23,9 +23,10 @@ class BnumDict(OrderedDict):
     recorded.  OrderedDict allows implicit values to be ordered correctly.
     '''
 
-    def __init__(self, implicit=False):
+    def __init__(self, implicit=False, values=None):
         super().__init__()
         self.implicit = implicit
+        self.values = values
 
     def __enter__(self):
         self.implicit = True
@@ -37,20 +38,33 @@ class BnumDict(OrderedDict):
         '''Provide a default value of None.'''
         if self.implicit:
             if item not in self:
-                self[item] = None
+                super().__setitem__(item, self.values(item))
         else:
             if item == 'implicit':
                 return self
         return super().__getitem__(item)
 
+    def __setitem__(self, key, value):
+        if self.implicit and not dunder(key):
+            raise TypeError('Cannot use explicit value for %s' % key)
+        return super().__setitem__(key, value)
+
 
 ILLEGAL_NAMES = {'mro', '_create', '_get_mixins', '_find_new'}
 
 
-def names(enums):
-    for name, value in enums.items():
-        if value is None: enums[name] = name
-    return enums
+def names():
+    def value(name):
+        return name
+    return value
+
+def from_one():
+    count = 0
+    def value(name):
+        nonlocal count
+        count += 1
+        return count
+    return value
 
 
 class BnumMeta(type):
@@ -61,8 +75,12 @@ class BnumMeta(type):
     __new__ constructs the class.
     '''
 
+    def __init__(metacls, cls, bases=None, dict=None,
+                 values=None, allow_aliases=False):
+        super().__init__(cls, bases, dict)
+
     def __new__(metacls, cls, bases, classdict,
-                values=names, allow_aliases=False):
+                values=None, allow_aliases=False):
         '''
 
         '''
@@ -73,10 +91,11 @@ class BnumMeta(type):
             metacls._find_new(classdict, obj_type, first_enum)
 
         # separate enumerations from other class members
-        enums, others = metacls._split_class_contents(classdict)
+        enums_by_name, others = metacls._split_class_contents(classdict)
+        enums_by_value = {}
 
         # check for illegal enum names
-        if set(enums.keys()) & ILLEGAL_NAMES:
+        if set(enums_by_name.keys()) & ILLEGAL_NAMES:
             raise ValueError('Enumeration names cannot include '
                              + ','.join(ILLEGAL_NAMES))
 
@@ -87,10 +106,6 @@ class BnumMeta(type):
         if obj_type is not object and obj_type.__dict__.get('__getnewargs__') is None:
             enum_class.__reduce__ = break_noisily_on_pickle
             enum_class.__module__ = 'uh uh'  # wtf does this mean?
-
-        # provide implicit values
-        enums_by_name = values(enums)
-        enums_by_value = {}
 
         # instantiate and then check for values (as Enum - someone could use
         # the constructor to do auto-numbering...)
@@ -291,15 +306,17 @@ class BnumMeta(type):
 class ImplicitBnumMeta(BnumMeta):
 
     @classmethod
-    def __prepare__(metacls, cls, bases):
-        return BnumDict(implicit=True)
+    def __prepare__(metacls, cls, bases,
+                values=None, allow_aliases=False):
+        return BnumDict(implicit=True, values=values() if values else names())
 
 
 class ExplicitBnumMeta(BnumMeta):
 
     @classmethod
-    def __prepare__(metacls, cls, bases):
-        return BnumDict(implicit=False)
+    def __prepare__(metacls, cls, bases,
+                values=None, allow_aliases=False):
+        return BnumDict(implicit=False, values=values() if values else names())
 
 
 
