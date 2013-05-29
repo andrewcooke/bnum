@@ -11,16 +11,16 @@ Modifications (c) 2013 Andrew Cooke, andrew@acooke.org
 __all__ = ['ImplicitBnum', 'ExplicitBnum']
 
 
-# this is needed because BnumMeta runs twice - once to create Bnum and
-# once to create the Bnum subclass.  On the first run, Bnum doesn't exist.
+# this is needed because BnumMeta runs multiple times - to create Bnum etc
+# and then to create enum subclasses.  on the first runs, Bnum etc don't exist.
 Bnum ,ImplicitBnum, ExplicitBnum = None, None, None
 
 
-class BnumDict(OrderedDict):
+class BnumDict(dict):
     '''
     The dictionary supplied by BnumMeta to store the class contents.  We
-    provide a default value of None so that names without assignment are
-    recorded.  OrderedDict allows implicit values to be ordered correctly.
+    provide a default value when implicit is true, and allow implicit to
+    be enabled via "with implicit".
     '''
 
     def __init__(self, implicit=False, values=None):
@@ -44,10 +44,10 @@ class BnumDict(OrderedDict):
                 return self
         return super().__getitem__(item)
 
-    def __setitem__(self, key, value):
-        if self.implicit and not dunder(key):
-            raise TypeError('Cannot use explicit value for %s' % key)
-        return super().__setitem__(key, value)
+    def __setitem__(self, name, value):
+        if self.implicit and not dunder(name):
+            raise TypeError('Cannot use explicit value for %s' % name)
+        return super().__setitem__(name, value)
 
 
 ILLEGAL_NAMES = {'mro', '_create', '_get_mixins', '_find_new'}
@@ -138,9 +138,6 @@ class BnumMeta(type):
                 enums_by_name[name] = enum_item
             enums_by_value[enum_item.value] = enum_item
 
-        print('by names', enums_by_name)
-        print('by value', enums_by_value)
-
         # more pickle-related logic from Enum
         for name in ('__repr__', '__str__', '__getnewargs__'):
             class_method = getattr(enum_class, name)
@@ -165,9 +162,8 @@ class BnumMeta(type):
 
     @staticmethod
     def _split_class_contents(classdict):
-        enums, others = OrderedDict(), dict()
+        enums, others = dict(), dict()
         for (name, value) in classdict.items():
-            # this is the same test used in EnumDict
             if dunder(name) or hasattr(value, '__get__'):
                 others[name] = value
             else:
@@ -209,9 +205,9 @@ class BnumMeta(type):
     def __iter__(cls):
         return (cls._enums_by_name[name] for name in cls._enums_by_name)
 
-    # def __len__(cls):
-    #     return len(cls._enum_names)
-    #
+    def __len__(cls):
+        return len(cls._enums_by_name)
+
     # def __repr__(cls):
     #     return "<enum %r>" % cls.__name__
 

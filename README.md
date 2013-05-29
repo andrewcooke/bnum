@@ -74,7 +74,7 @@ Basic Use
 At its simplest, a Bnum defines a collection of distinct names:
 
 ```python
->>> class Colour(Bnum):
+>>> class Colour(ImplicitBnum):
 ...     red = ...
 ...     green = ...
 ...     blue = ...
@@ -102,7 +102,7 @@ And the class itself behaves as a collection of the instances it contains:
 
 ```python
 >>> list(Colour)
-['blue', 'green', 'red']  # TODO - check
+[Colour('blue'), Colour('green'), Colour('red')]
 >>> len(Colour)
 3
 >>> Colour.red in Colour
