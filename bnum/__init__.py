@@ -1,5 +1,6 @@
 
 from collections import OrderedDict
+from itertools import count
 from enum import dunder, break_noisily_on_pickle
 
 '''
@@ -37,7 +38,7 @@ class BnumDict(dict):
     def __getitem__(self, item):
         '''Provide a default value of None.'''
         if self.implicit:
-            if item not in self:
+            if item not in self and not dunder(item):
                 super().__setitem__(item, self.values(item))
         else:
             if item == 'implicit':
@@ -58,12 +59,24 @@ def names():
         return name
     return value
 
-def from_one():
+def from_counter(start, step=1):
+    def outer():
+        counter = count(start, step)
+        def value(name):
+            nonlocal counter
+            return next(counter)
+        return value
+    return outer
+
+from_one = from_counter(1)
+from_zero = from_counter(0)
+
+def bits():
     count = 0
     def value(name):
         nonlocal count
         count += 1
-        return count
+        return 2 ** (count - 1)
     return value
 
 
@@ -169,6 +182,23 @@ class BnumMeta(type):
             else:
                 enums[name] = value
         return enums, others
+
+    def __call__(cls, value=None, name=None):
+        if value is None:
+            if name is None:
+                raise ValueError('Give name or value')
+            else:
+                return cls._enums_by_name[name]
+        else:
+            if name is None:
+                return cls._enums_by_value[value]
+            else:
+                a = cls._enums_by_name[name]
+                if a is cls._enums_by_value[value]:
+                    return a
+                else:
+                    raise ValueError('Inconsistent name (%r) and value (%r)' %
+                                     (name, value))
 
     # def __contains__(cls, enum_item):
     #     return isinstance(enum_item, cls) and enum_item.name in cls._enum_map
@@ -351,8 +381,8 @@ class Bnum():
     def __str__(self):
         return str(self._value)
 
-    def __dir__(self):
-        return (['__class__', '__doc__', 'name', 'value'])
+    # def __dir__(self):
+    #     return (['__class__', '__doc__', 'name', 'value'])
 
     def __eq__(self, other):
         if type(other) is self.__class__:
@@ -364,13 +394,6 @@ class Bnum():
 
     def __hash__(self):
         return hash(self._name)
-
-    # _StealthProperty is used to provide access to the `name` and `value`
-    # properties of enum members while keeping some measure of protection
-    # from modification, while still allowing for an enumeration to have
-    # members named `name` and `value`.  This works because enumeration
-    # members are not set directely on the enum class -- __getattr__ is
-    # used to look them up.
 
     @property
     def name(self):
