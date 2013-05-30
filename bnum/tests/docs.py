@@ -44,12 +44,6 @@ class Strange(ExplicitBnum):
         baz
 
 
-class OK(ExplicitBnum, values=from_one, allow_aliases=True):
-    with implicit:
-        a
-    b = 1  # an alias
-
-
 class QuickStartTest(TestCase):
 
     def test_colour(self):
@@ -127,15 +121,23 @@ class OrderingTest(TestCase):
 class AliasesTest(TestCase):
 
     def test_error(self):
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             class Error(ExplicitBnum, values=from_one):
                 with implicit:
                     a
                 b = 1
 
     def test_ok(self):
+
+        class OK(ExplicitBnum, values=from_one, allow_aliases=True):
+            with implicit:
+                a
+            b = 1  # an alias
+
+        assert repr(OK(name='a')) == "OK(value=1, name='a')", repr(OK(name='a'))
         assert repr(OK(name='b')) == "OK(value=1, name='a')", repr(OK(name='b'))
-        assert str(list(OK)) == "", str(list(OK))
+        assert repr(OK(value=1)) == "OK(value=1, name='a')", repr(OK(value=1))
+        assert str(list(OK)) == "[OK(value=1, name='a')]", str(list(OK))
 
 
 class OtherTest(TestCase):

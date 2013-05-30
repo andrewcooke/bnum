@@ -257,18 +257,20 @@ check by setting `allow_aliases=True`.
 Aliases are valid instances, but are not listed or retrieved:
 
 ```python
->>> class Error(Bnum, values=from_one):
-...     a = ...
+>>> class Error(ExplicitBnum, values=from_one):
+...     with implicit:
+...         a
 ...     b = 1  # an error
-Error: blah blah
->>> class OK(Bnum, values=from_one, allow_aliases=True):
-...     a = ...
+ValueError: Duplicate value for b, a
+>>> class OK(ExplicitBnum, values=from_one, allow_aliases=True):
+...     with implicit:
+...         a
 ...     b = 1  # an alias
 ...
 >>> repr(OK('b'))
-OK(name='a', value=1)
+OK(value=1, name='a')
 >>> list(OK)
-[1]  # TODO - check the correct output here; maybe len() would be better?
+[OK(value=1, name='a')]
 ```
 
 Advanced Use
@@ -282,7 +284,7 @@ arbitrary classes:
 ```python
 >>> class Animal(ExplicitBnum):
 ...
-...     def __init__(self, legs ,noise):
+...     def __init__(self, legs, noise):
 ...         self.legs = legs
 ...         self.noise = noise
 ...
@@ -319,10 +321,10 @@ because then you can use the instance directly in expressions.  This can be
 achieved by adding the required type (typically `int` as a mixin):
 
 ```python
->>> class IntEmphasis(int, Bnum, values=bits):
-...     underline = ...
-...     italic = ...
-...     bold = ...
+>>> class IntEmphasis(int, ImplicitBnum, values=bits):
+...     underline
+...     italic
+...     bold
 ...
 >>> 2 & (IntEmphasis.underline | IntEmphasis.italic)
 2

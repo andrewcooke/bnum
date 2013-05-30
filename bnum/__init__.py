@@ -17,14 +17,17 @@ __all__ = ['ImplicitBnum', 'ExplicitBnum']
 Bnum ,ImplicitBnum, ExplicitBnum = None, None, None
 
 
-class BnumDict(dict):
+class BnumDict(OrderedDict):
     '''
     The dictionary supplied by BnumMeta to store the class contents.  We
     provide a default value when implicit is true, and allow implicit to
     be enabled via "with implicit".
+
+    An ordered dict is needed to preserve the order of side-effects (things
+    like which alias is preferred).
     '''
 
-    def __init__(self, implicit=False, values=None):
+    def __init__(self, implicit, values):
         super().__init__()
         self.implicit = implicit
         self.values = values
@@ -141,15 +144,18 @@ class BnumMeta(type):
             enum_item._name = name
             enum_item.__init__(*args)
 
+            print(repr(enum_item))
             if enum_item.value in enums_by_value:
                 if allow_aliases:
+                    print(name)
                     enums_by_name[name] = enums_by_value[enum_item.value]
+                    print(enums_by_name)
                 else:
                     raise ValueError('Duplicate value for %s, %s' %
                                      (name, enums_by_value[enum_item.value].name))
             else:
                 enums_by_name[name] = enum_item
-            enums_by_value[enum_item.value] = enum_item
+                enums_by_value[enum_item.value] = enum_item
 
         # more pickle-related logic from Enum
         for name in ('__repr__', '__str__', '__getnewargs__'):
@@ -163,19 +169,19 @@ class BnumMeta(type):
                 enum_class.__new_member__ = __new__
             enum_class.__new__ = Bnum.__new__
 
-        enum_class._enums_by_value = enums_by_value
+        enum_class._enums_by_name = enums_by_name
         try:
-            enum_class._enums_by_name = \
-                OrderedDict((enums_by_value[value].name, enums_by_value[value])
+            enum_class._enums_by_value = \
+                OrderedDict((value, enums_by_value[value])
                             for value in sorted(enums_by_value.keys()))
         except:
-            enum_class._enums_by_name = enums_by_name
+            enum_class._enums_by_value = enums_by_value
 
         return enum_class
 
     @staticmethod
     def _split_class_contents(classdict):
-        enums, others = dict(), dict()
+        enums, others = OrderedDict(), dict()
         for (name, value) in classdict.items():
             if dunder(name) or hasattr(value, '__get__'):
                 others[name] = value
@@ -190,6 +196,7 @@ class BnumMeta(type):
             elif name in cls._enums_by_name:
                 return cls._enums_by_name[name]
             else:
+                print(cls._enums_by_name)
                 raise ValueError('No name %r' % name)
         if name is None:
             if value in cls._enums_by_value:
@@ -237,7 +244,7 @@ class BnumMeta(type):
     #     return cls._enum_map[name]
 
     def __iter__(cls):
-        return (cls._enums_by_name[name] for name in cls._enums_by_name)
+        return (cls._enums_by_value[value] for value in cls._enums_by_value)
 
     def __len__(cls):
         return len(cls._enums_by_name)
