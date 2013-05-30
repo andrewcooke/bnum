@@ -44,7 +44,7 @@ class BnumDict(OrderedDict):
             if item not in self and not dunder(item):
                 super().__setitem__(item, self.values(item))
         else:
-            if item == 'implicit':
+            if item not in self and item == 'implicit':
                 return self
         return super().__getitem__(item)
 
