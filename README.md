@@ -351,8 +351,8 @@ construct an integer.
 
 ### Providing Implicit Values
 
-The `values` parameter expects a no-argument function which returns a
-second function from names to values.
+The `values` parameter expects a no-argument function (called once per class
+definition), which returns a second function from names to values.
 
 So, for example, to give random values:
 
