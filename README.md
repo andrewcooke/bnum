@@ -18,6 +18,7 @@ identified in a
    * [Ordering](#ordering)
    * [Aliases](#aliases)
 * [Advanced Use](#advanced-use)
+   * [Constructors And Methods](#constructors-and-methods)
    * [Multiple Inheritance](#multiple-inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
 * [FAQ](#faq)
@@ -272,6 +273,44 @@ OK(name='a', value=1)
 
 Advanced Use
 ------------
+
+### Constructors And Methods
+
+The following example shows how `ExplicitBnum` can define and instantiate
+arbitrary classes:
+
+```python
+>>> class Animal(ExplicitBnum):
+...
+...     def __init__(self, legs ,noise):
+...         self.legs = legs
+...         self.noise = noise
+...
+...     def talk(self):
+...         return self.noise
+...
+...     def __str__(self):
+...         return 'A %s has %d legs and says %r' % \
+...                (self.name, self.legs, self.talk())
+...
+...     pig = 4, 'oink'
+...     hen = 2, 'cluck'
+...     cow = 4, 'moo'
+...
+>>> repr(Animal.pig)
+Animal(value=(4, 'oink'), name='pig')
+>>> Animal.pig
+A pig has 4 legs and says 'oink'
+>>> Animal((4, 'oink')) is Animal.pig
+True
+>>> Animal.pig.value
+(4, 'oink')
+```
+
+Note that `value` is the value given in the definition, and not the instance.
+
+`ImplicitBnum` does not support this (see the [FAQ](#faq)), but you can
+still use `with implicit` inside an `ExplicitBnum`.
 
 ### Multiple Inheritance
 

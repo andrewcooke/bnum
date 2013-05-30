@@ -195,7 +195,7 @@ class BnumMeta(type):
             if value in cls._enums_by_value:
                 return cls._enums_by_value[value]
             else:
-                raise ValueError('No value %s' % value)
+                raise ValueError('No value %r' % value)
         if name in cls._enums_by_name:
             enum = cls._enums_by_name[name]
             if value in cls._enums_by_value and \

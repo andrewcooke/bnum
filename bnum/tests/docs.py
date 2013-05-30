@@ -151,5 +151,26 @@ class OtherTest(TestCase):
                 with implicit:
                     one = 1
 
+    def test_constructor(self):
 
+        class Animal(ExplicitBnum):
 
+            def __init__(self, legs ,noise):
+                self.legs = legs
+                self.noise = noise
+
+            def talk(self):
+                return self.noise
+
+            def __str__(self):
+                return 'A %s has %d legs and says %r' % \
+                       (self.name, self.legs, self.talk())
+
+            pig = 4, 'oink'
+            hen = 2, 'cluck'
+            cow = 4, 'moo'
+
+        assert Animal.pig in Animal
+        assert str(Animal.pig) == "A pig has 4 legs and says 'oink'", str(Animal.pig)
+        assert Animal((4, 'oink')) == Animal.pig
+        assert Animal.pig.value == (4, 'oink'), Animal.pig.value
