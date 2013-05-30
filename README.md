@@ -76,9 +76,9 @@ At its simplest, a Bnum defines a collection of distinct names:
 
 ```python
 >>> class Colour(ImplicitBnum):
-...     red = ...
-...     green = ...
-...     blue = ...
+...     red
+...     green
+...     blue
 ```
 
 These can be tested for equality, are instances of the class on which they
