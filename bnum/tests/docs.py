@@ -8,37 +8,60 @@ Test all the assertions made in the documentation.
 '''
 
 
+class Colour(ImplicitBnum):
+    red
+    green
+    blue
+
+
+class Number(int, ExplicitBnum, values=from_one):
+    with implicit:
+        one
+        two
+    three = one + two
+
+
+class FavouriteNumbers(ExplicitBnum):
+    forty_two = 42
+    seven = 7
+
+
+class Weekday(ImplicitBnum, values=from_one):
+    monday, tuesday, wednesday, thursday, friday
+    saturday, sunday
+
+
+class Emphasis(ImplicitBnum, values=bits):
+    underline
+    italic
+    bold
+
+
+class Strange(ExplicitBnum):
+    foo = 42
+    bar = 'fish'
+    with implicit:
+        baz
+
+
+class OK(ExplicitBnum, values=from_one, allow_aliases=True):
+    with implicit:
+        a
+    b = 1  # an alias
+
+
 class QuickStartTest(TestCase):
 
     def test_colour(self):
-
-        class Colour(ImplicitBnum):
-            red
-            green
-            blue
-
         assert str(list(map(str, Colour))) == "['blue', 'green', 'red']", str(list(map(str, Colour)))
 
     def test_number(self):
-
-        class Number(int, ExplicitBnum, values=from_one):
-            with implicit:
-                one
-                two
-            three = one + two
-
         assert isinstance(Number.two, int), type(Number.two)
 
 
 class BasicTest(TestCase):
 
     def test_colour(self):
-
-        class Colour(ImplicitBnum):
-            red
-            green
-            blue
-
         assert Colour.red != Colour.blue
         assert Colour.red == Colour.red
         assert isinstance(Colour.red, Colour), type(Colour.red)
@@ -53,65 +76,66 @@ class BasicTest(TestCase):
 class ValueTest(TestCase):
 
     def test_colour(self):
-
-        class Colour(ImplicitBnum):
-            red
-            green
-            blue
-
         assert Colour.red.value == 'red', Colour.red.value
         assert str(Colour.red) == 'red', str(Colour.red)
         assert type(Colour.red.value) == str, type(Colour.red.value)
         assert Colour('red') is Colour.red
 
     def test_favourite_numbers(self):
-
-        class FavouriteNumbers(ExplicitBnum):
-            forty_two = 42
-            seven = 7
-
         assert FavouriteNumbers.seven.value == 7, FavouriteNumbers.seven.value
         assert str(FavouriteNumbers.seven) == '7', str(FavouriteNumbers.seven)
 
     def test_weekday(self):
-
-        class Weekday(ImplicitBnum, values=from_one):
-            monday, tuesday, wednesday, thursday, friday
-            saturday, sunday
-
         assert Weekday.sunday.name == 'sunday', Weekday.sunday.name
         assert Weekday.sunday.value == 7, Weekday.sunday.value
         assert repr(Weekday.sunday) == "Weekday(value=7, name='sunday')", repr(Weekday.sunday)
 
     def test_emphasis(self):
-
-        class Emphasis(ImplicitBnum, values=bits):
-            underline
-            italic
-            bold
-
         assert Emphasis.underline.value == 1, Emphasis.underline.value
         assert Emphasis.bold.value == 4, Emphasis.bold.value
         assert Emphasis.bold.name == 'bold'
         with self.assertRaises(TypeError):
             2 & (Emphasis.italic | Emphasis.bold)
 
-    # GOT TO HERE!
-
-    def test_number(self):
-
-        class Number(int, ExplicitBnum, values=from_one):
-            with implicit:
-                one
-                two
-            three = one + two
-
-        assert isinstance(Number.two, int), type(Number.two)
-        assert Number.three == 3, Number.three
-        assert repr(Number.three) == "Number(value=3, name='three')", repr(Number.three)
+    def test_strange(self):
+        assert Strange.baz.value == 'baz', Strange.baz.value
 
 
+class RetrievalTest(TestCase):
 
+    def test_colour(self):
+        assert Colour('red') is Colour.red
+
+    def test_emphasis(self):
+        assert Emphasis(2) is Emphasis.italic
+        assert Emphasis(name='italic') is Emphasis(value=2, name='italic') is Emphasis.italic
+        with self.assertRaises(ValueError):
+            Emphasis(value=3, name='italic')
+
+
+class OrderingTest(TestCase):
+
+    def test_colour(self):
+        assert str(list(Colour)) == "[Colour('blue'), Colour('green'), Colour('red')]", str(list(Colour))
+
+    def test_emphasis(self):
+        assert repr(Emphasis.underline) == "Emphasis(value=1, name='underline')", repr(Emphasis.underline)
+        assert repr(Emphasis.italic) == "Emphasis(value=2, name='italic')", repr(Emphasis.italic)
+        assert repr(Emphasis.bold) == "Emphasis(value=4, name='bold')", repr(Emphasis.bold)
+
+
+class AliasesTest(TestCase):
+
+    def test_error(self):
+        with self.assertRaises(Exception):
+            class Error(ExplicitBnum, values=from_one):
+                with implicit:
+                    a
+                b = 1
+
+    def test_ok(self):
+        assert repr(OK(name='b')) == "OK(value=1, name='a')", repr(OK(name='b'))
+        assert str(list(OK)) == "", str(list(OK))
 
 
 class OtherTest(TestCase):

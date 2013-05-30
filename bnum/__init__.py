@@ -141,12 +141,12 @@ class BnumMeta(type):
             enum_item._name = name
             enum_item.__init__(*args)
 
-            if enum_item in enums_by_value:
+            if enum_item.value in enums_by_value:
                 if allow_aliases:
-                    enums_by_name[name] = enums_by_value[enum_item]
+                    enums_by_name[name] = enums_by_value[enum_item.value]
                 else:
                     raise ValueError('Duplicate value for %s, %s' %
-                                     (name, enums_by_value[enum_item].name))
+                                     (name, enums_by_value[enum_item.value].name))
             else:
                 enums_by_name[name] = enum_item
             enums_by_value[enum_item.value] = enum_item
@@ -187,18 +187,22 @@ class BnumMeta(type):
         if value is None:
             if name is None:
                 raise ValueError('Give name or value')
-            else:
+            elif name in cls._enums_by_name:
                 return cls._enums_by_name[name]
-        else:
-            if name is None:
+            else:
+                raise ValueError('No name %r' % name)
+        if name is None:
+            if value in cls._enums_by_value:
                 return cls._enums_by_value[value]
             else:
-                a = cls._enums_by_name[name]
-                if a is cls._enums_by_value[value]:
-                    return a
-                else:
-                    raise ValueError('Inconsistent name (%r) and value (%r)' %
-                                     (name, value))
+                raise ValueError('No value %s' % value)
+        if name in cls._enums_by_name:
+            enum = cls._enums_by_name[name]
+            if value in cls._enums_by_value and \
+                            enum is cls._enums_by_value[value]:
+                return enum
+        raise ValueError('Inconsistent name (%r) and value (%r)' %
+                        (name, value))
 
     # def __contains__(cls, enum_item):
     #     return isinstance(enum_item, cls) and enum_item.name in cls._enum_map

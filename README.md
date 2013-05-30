@@ -197,14 +197,12 @@ You can even mix value types, although it may make the [ordering](#Ordering)
 undefined:
 
 ```python
->>> class Strange(Bnum):
+>>> class Strange(ExplicitBnum):
 ...     foo = 42
 ...     bar = 'fish'
-...     baz = ...  # implicitly the name, since no values argument given
+...     with implicit:
+...         baz  # value will be 'baz' as no alternative values given
 ```
-
-The only value you cannot have is `...` (ellipsis), which will be treated as
-missing and replaced by an implicit value.
 
 ### Retrieving Instances
 
@@ -219,7 +217,7 @@ True
 >>> Emphasis(name='italic') is Emphasis(value=2, name='italic') is Emphasis.italic
 True
 >>> Emphasis(value=3, name='italic')
-Error: blah blah
+ValueError: blah blah
 ```
 
 ### Ordering
@@ -232,7 +230,7 @@ strings).
 
 ```python
 >>> list(Colour)
-['blue', 'green', 'red']  # TODO - check
+['blue', 'green', 'red']
 ```
 
 If you choose numerical values (and don't give them yourself) then the
