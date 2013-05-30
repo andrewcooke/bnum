@@ -329,7 +329,7 @@ achieved by adding the value type (typically `int`) as a mixin:
 ...
 >>> 2 & (IntEmphasis.underline | IntEmphasis.italic)
 2
->>> isinstance(IntEmphasis.underline, Bnum)
+>>> isinstance(IntEmphasis.underline, ImplicitBnum)
 True
 >>> isinstance(IntEmphasis.underline, int)
 True
@@ -342,7 +342,7 @@ multiple arguments).  You will see errors if you mix incompatible types:
 >>> class Confused(int, ExplicitBnum):
 ...     foo = 'one'
 ...
-Error: blah, blah
+ValueError: invalid literal for int() with base 10: 'one'
 ````
 
 Here the default value is the name, which a string, which cannot be used to
@@ -379,7 +379,7 @@ Changes to the Enum semantics include:
 
 * values can be implicit (Enum requires explicit values in the "class" form,
   although there's undocumented support for this - see `auto_enum` in the
-  tests);
+  tests - that uses a `name = ...` syntax, with an ellipsis);
 
 * the default implicit value is the name;
 

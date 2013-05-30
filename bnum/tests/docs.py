@@ -44,6 +44,13 @@ class Strange(ExplicitBnum):
         baz
 
 
+class IntEmphasis(int, ImplicitBnum, values=bits):
+    underline
+    italic
+    bold
+
+
+
 class QuickStartTest(TestCase):
 
     def test_colour(self):
@@ -140,18 +147,7 @@ class AliasesTest(TestCase):
         assert str(list(OK)) == "[OK(value=1, name='a')]", str(list(OK))
 
 
-class OtherTest(TestCase):
-
-    def test_no_explicit_in_implicit(self):
-
-        with self.assertRaises(TypeError):
-            class Colour(ImplicitBnum):
-                red = 1
-
-        with self.assertRaises(TypeError):
-            class Number(int, ExplicitBnum, values=from_one):
-                with implicit:
-                    one = 1
+class ConstructorsAndMethodsTest(TestCase):
 
     def test_constructor(self):
 
@@ -176,3 +172,30 @@ class OtherTest(TestCase):
         assert str(Animal.pig) == "A pig has 4 legs and says 'oink'", str(Animal.pig)
         assert Animal((4, 'oink')) == Animal.pig
         assert Animal.pig.value == (4, 'oink'), Animal.pig.value
+
+
+class MultipleInheritanceTest(TestCase):
+
+    def test_int_emphasis(self):
+        assert 2 & (IntEmphasis.underline | IntEmphasis.italic) == 2
+        assert isinstance(IntEmphasis.underline, ImplicitBnum)
+        assert isinstance(IntEmphasis.underline, int)
+
+    def test_confused(self):
+        with self.assertRaises(ValueError):
+            class Confused(int, ExplicitBnum):
+                foo = 'one'
+
+
+class OtherTest(TestCase):
+
+    def test_no_explicit_in_implicit(self):
+
+        with self.assertRaises(TypeError):
+            class Colour(ImplicitBnum):
+                red = 1
+
+        with self.assertRaises(TypeError):
+            class Number(int, ExplicitBnum, values=from_one):
+                with implicit:
+                    one = 1
