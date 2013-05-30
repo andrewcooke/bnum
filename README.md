@@ -353,46 +353,14 @@ FAQ
 
 ### Why Implicit And Explicit?
 
-Why not use
+The "hack" used to provide implicit values confuses other functionality, so
+can only be used in a restricted context (the `with implicit`) or a class
+that is only used for that (`ImplicitBnum`).
 
-```python
->>> class Colour(Bnum):
-...     red
-...     green
-...     blue
-```
-
-as [described](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)
-by Duncan Booth?
-
-Unfortunately, this requires the class dictionary to supply `None` (or
-some other flag value) for names that do not exist.  While that works fine in
-simple cases it shadows any global references (which are first resolved against
-class scope and then, on failure, against the surrounding scope).
-
-The only solutions I can see are:
-
-1. use a special (explicit) value;
-1. use a special format for names;
-1. use strings rather than identifiers;
-1. use a new (`with`) scope to introduce names with implicit values.
-
-The first, with ellipses, is what Enum uses for its auto-numbering (currently
-undocumented, but visible in the source) and it seems better than the
-alternatives.
-
-A restricted scope
-
-```python
->>> class Colour(Bnum):
-...     with values(from_one):
-...         red
-...         green
-...         blue
-```
-
-can isolate the problem to a smaller region of the class, but still has
-problems with globals used to define enumeration values.
+In a little more detail, it works by providing default values for any name
+requested, but missing, from the class dictionary.  This causes problems
+when the name exists in an outer scope, because it is shadowed by the
+default value.
 
 Comparison with Enum
 --------------------
