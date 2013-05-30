@@ -354,7 +354,7 @@ FAQ
 ### Why Implicit And Explicit?
 
 The "hack" used to provide implicit values confuses other functionality, so
-can only be used in a restricted context (the `with implicit`) or a class
+can only be used in a restricted context (`with implicit`) or a class
 that is only used for that (`ImplicitBnum`).
 
 In a little more detail, it works by providing default values for any name
