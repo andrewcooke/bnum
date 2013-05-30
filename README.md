@@ -384,6 +384,9 @@ requested, but missing, from the class dictionary.  This causes problems
 when the name exists in an outer scope, because it is shadowed by the
 default value.
 
+But, fortunately, you don't need references to an external scope if you're
+defining a list of names (only).  So it works.
+
 Comparison with Enum
 --------------------
 
