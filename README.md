@@ -339,8 +339,8 @@ This works by constructing the given type from the value (use a tuple for
 multiple arguments).  You will see errors if you mix incompatible types:
 
 ```python
->>> class Confused(int, Bnum):
-...     string = ...
+>>> class Confused(int, ExplicitBnum):
+...     foo = 'one'
 ...
 Error: blah, blah
 ````
@@ -423,18 +423,19 @@ changes (and non-changes).
 Have a simple list of names in "class" form:
 
 ```python
->>> class Colour(Bnum):
-...     red = ...
-...     green = ...
-...     blue = ...
+>>> class Colour(ImplicitBnum):
+...     red
+...     green
+...     blue
 ```
 
 Detect a stupid mistake:
 
 ```python
->>> class Error(Bnum, values=from_one):
-...     one = ...
-...     two = ...
+>>> class Error(ExplicitBnum, values=from_one):
+...     with implicit:
+...         one
+...         two
 ...     three = 2
 ...
 Error: blah, blah
@@ -443,10 +444,10 @@ Error: blah, blah
 Define bit fields:
 
 ```python
->>> class IntEmphasis(int, Bnum, values=bits):
-...     underline = ...
-...     italic = ...
-...     bold = ...
+>>> class IntEmphasis(int, ImplicitBnum, values=bits):
+...     underline
+...     italic
+...     bold
 ...
 >>> allowed_styles = IntEmphasis.italic | IntEmphasis.bold
 ```
