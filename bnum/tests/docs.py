@@ -187,6 +187,19 @@ class MultipleInheritanceTest(TestCase):
                 foo = 'one'
 
 
+class ProvidingImplicitValuesTest(TestCase):
+
+    def test_random(self):
+        from random import random
+        def random_values():
+            def value(name):
+                return random()
+            return value
+        class Random(ImplicitBnum, values=random_values):
+            a, b, c
+        print(list(Random))
+
+
 class ThingsYouCanDoTest(TestCase):
 
     def test_stupid(self):

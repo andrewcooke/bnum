@@ -21,7 +21,7 @@ identified in a
 * [Advanced Use](#advanced-use)
    * [Constructors And Methods](#constructors-and-methods)
    * [Multiple Inheritance](#multiple-inheritance)
-   * [Calculating Implicit Values](#calculating-implicit-values)
+   * [Providing Implicit Values](#providing-implicit-values)
 * [FAQ](#faq)
    * [Why Implicit And Explicit?](#why-implicit-and-explicit)
 * [Comparison With Enum](#comparison-with-enum)
@@ -348,6 +348,27 @@ ValueError: invalid literal for int() with base 10: 'one'
 
 Here the default value is the name, which a string, which cannot be used to
 construct an integer.
+
+### Providing Implicit Values
+
+The `values` parameter expects a no-argument function which returns a
+second function from names to values.
+
+So, for example, to give random values:
+
+```python
+>>> from random import random
+>>> def random_values():
+...     def value(name):
+...         return random()
+...     return value
+...
+>>> class Random(ImplicitBnum, values=random_values):
+...     a, b, c
+...
+>>> list(Random)
+[Random(value=0.49267653329514594, name='c'), Random(value=0.5521902021074088, name='b'), Random(value=0.5540234367417308, name='a')]
+```
 
 FAQ
 ---
