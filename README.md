@@ -438,7 +438,7 @@ Detect a stupid mistake:
 ...         two
 ...     three = 2
 ...
-Error: blah, blah
+ValueError: Duplicate value for three, two
 ```
 
 Define bit fields:

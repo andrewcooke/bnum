@@ -187,15 +187,15 @@ class MultipleInheritanceTest(TestCase):
                 foo = 'one'
 
 
-class OtherTest(TestCase):
+class ThingsYouCanDoTest(TestCase):
 
-    def test_no_explicit_in_implicit(self):
-
-        with self.assertRaises(TypeError):
-            class Colour(ImplicitBnum):
-                red = 1
-
-        with self.assertRaises(TypeError):
-            class Number(int, ExplicitBnum, values=from_one):
+    def test_stupid(self):
+        with self.assertRaises(ValueError):
+            class Error(ExplicitBnum, values=from_one):
                 with implicit:
-                    one = 1
+                    one
+                    two
+                three = 2
+
+
+
