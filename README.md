@@ -8,7 +8,8 @@ Bnum is an enumeration class for Python 3.  It is broadly
 the same code), but has been tweaked to address
 [issues](#things-you-can-do-with-bnum-that-you-cant-do-with-enum)
 identified in a
-[rant](http://www.acooke.org/cute/Pythonssad0.html) I wrote some time ago.
+[rant](http://www.acooke.org/cute/Pythonssad0.html) I wrote some time ago
+(see [TYCDWB(TYCDWE)](#things-you-can-do-with-bnum-that-you-cant-do-with-enum)).
 
 * [Quick Start](#quick-start)
 * [Basic Use](#basic-use)
