@@ -22,7 +22,7 @@ identified in a
    * [Multiple Inheritance](#multiple-inheritance)
    * [Calculating Implicit Values](#calculating-implicit-values)
 * [FAQ](#faq)
-   * [Why The Ellipses?](#why-the-ellipses)
+   * [Why Implicit And Explicit?](#why-implicit-and-explicit)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
    * [List Of Differences](#list-of-differences)
@@ -231,7 +231,7 @@ strings).
 
 ```python
 >>> list(Colour)
-['blue', 'green', 'red']
+[Colour('blue'), Colour('green'), Colour('red')]
 ```
 
 If you choose numerical values (and don't give them yourself) then the
@@ -254,7 +254,8 @@ By default, it is an error to repeat a value, because mixing implicit and
 explicit values could give very confusing bugs.  You can disable this safety
 check by setting `allow_aliases=True`.
 
-Aliases are valid instances, but are not listed or retrieved:
+Aliases are not listed or retrieved, but can be used to identify the
+"fundamental" instance:
 
 ```python
 >>> class Error(ExplicitBnum, values=from_one):
@@ -318,7 +319,7 @@ still use `with implicit` inside an `ExplicitBnum`.
 
 It can sometimes be useful to have enumerations that *are* their value,
 because then you can use the instance directly in expressions.  This can be
-achieved by adding the required type (typically `int` as a mixin):
+achieved by adding the value type (typically `int`) as a mixin:
 
 ```python
 >>> class IntEmphasis(int, ImplicitBnum, values=bits):
@@ -350,7 +351,7 @@ construct an integer.
 FAQ
 ---
 
-### Why The Ellipses?
+### Why Implicit And Explicit?
 
 Why not use
 
