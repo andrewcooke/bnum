@@ -24,6 +24,8 @@ identified in a
    * [Providing Implicit Values](#providing-implicit-values)
 * [FAQ](#faq)
    * [Why Implicit And Explicit?](#why-implicit-and-explicit)
+   * [Didn't You Say...?](#didnt-you-say)
+   * [Isn't Explicit Better Than Implicit?](#isnt-explicit-better-than-implicit)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
    * [List Of Differences](#list-of-differences)
@@ -386,6 +388,31 @@ default value.
 
 But, fortunately, you don't need references to an external scope if you're
 defining a list of names (only).  So it works.
+
+### Didn't You Say...?
+
+Didn't you [say](http://www.acooke.org/cute/Pythonssad0.html) this was a
+syntax error?
+
+Yes, I did.  I was wrong.
+
+[Duncan Booth](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)
+provided the solution *and* the motivation to question my betters.
+
+### Isn't Explicit Better Than Implicit?
+
+Not in this case.
+
+But if you disagree, you're welcome to write:
+
+```python
+>>> class Colour(ExplicitBnum):
+...     red = 'red'
+...     green = 'green'
+...     blue = 'blue'
+```
+
+A foolish consistency is the hobgoblin of little minds.
 
 Comparison with Enum
 --------------------

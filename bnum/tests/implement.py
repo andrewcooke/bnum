@@ -17,6 +17,10 @@ class NoExplicitTest(TestCase):
                 red = 1
 
         with self.assertRaises(TypeError):
+            class Colour(ImplicitBnum):
+                def foo(self): pass
+
+        with self.assertRaises(TypeError):
             class Number(int, ExplicitBnum, values=from_one):
                 with implicit:
                     one = 1
