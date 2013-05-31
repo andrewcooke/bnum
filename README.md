@@ -398,7 +398,7 @@ provided the solution *and* the motivation to question my betters.
 
 ### Isn't Explicit Better Than Implicit?
 
-Not in this case ("a foolish consistency is the hobgoblin of little minds").
+Not in this case, apparently.
 
 But if you disagree, you're free to write:
 
