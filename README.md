@@ -55,6 +55,8 @@ green
 red
 ```
 
+(alphabetical [order](#order), btw).
+
 If you want integers from 1, explicit values, and the ability to use
 enumeration values in expressions:
 
