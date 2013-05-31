@@ -400,7 +400,7 @@ provided the solution *and* the motivation to question my betters.
 
 Not in this case ("a foolish consistency is the hobgoblin of little minds").
 
-But if you disagree, you're welcome to write:
+But if you disagree, you're free to write:
 
 ```python
 >>> class Colour(ExplicitBnum):
