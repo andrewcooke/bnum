@@ -213,8 +213,9 @@ undefined:
 
 ### Retrieving Instances
 
-If you have the value, or name (or both, as long as they are consistent), then
-you can get the appropriate instance by calling the class:
+If you have the [value](#values), or [name](#names) (or both, as long as
+they are consistent), then you can get the appropriate instance by calling the
+class:
 
 ```python
 >>> Colour('red') is Colour.red  # default is to use the value
