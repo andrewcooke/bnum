@@ -118,7 +118,7 @@ True
 
 ### Values
 
-Instances have values as well as names.
+Instances have values as well as [names](#names).
 
 The default, implicit value of an instance is its name:
 
@@ -229,7 +229,7 @@ ValueError: blah blah
 
 ### Ordering
 
-Instances are ordered by value.
+Instances are ordered by [value](#values).
 
 Since the default value is the name itself, the default ordering when iterating
 over a Bnum is alphabetical (from comparison of the values, which are names, as
@@ -256,9 +256,9 @@ In such cases, the order will be arbitrary (but fixed and error-free).
 
 ### Aliases
 
-By default, it is an error to repeat a value, because mixing implicit and
-explicit values could give very confusing bugs.  You can disable this safety
-check by setting `allow_aliases=True`.
+By default, it is an error to repeat a [value](#values), because mixing
+implicit and explicit values could give very confusing bugs.  You can disable
+this safety check by setting `allow_aliases=True`.
 
 Aliases are not listed or retrieved, but can be used to identify the
 "fundamental" instance:
