@@ -460,7 +460,7 @@ the code base.
 You could characterise the Enum design as one driven by enumerations as
 values (in particular, integers, reflecting a C or Java influence).
 In contrast, I started from the idea that the simplest enumeration is a set of
-names.
+symbols (names).
 
 As with most designs, many choices are inter-linked; getting a consistent
 set of choices is analogous to a local maximum in the "design space".
