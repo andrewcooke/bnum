@@ -57,8 +57,9 @@ red
 
 (they are printed in alphabetical [order](#ordering), btw).
 
-If you want integers from 1, explicit values, and the ability to use
-enumeration values in expressions:
+At the other, hopefully less-used, extreme, if you want integers from 1,
+explicit values, and the ability to use enumeration values in expressions,
+then you can do that too:
 
 ```python
 >>> from bnum import ExplicitBnum, from_one
