@@ -503,5 +503,5 @@ Credits
 -------
 
 Despite my intemperate language in the rant, this work would not have been
-possible without the prior work of those who developed Enum (I learnt a lot
-trying to understand that code).
+possible without the prior work of those who developed Enum.  Particularly
+Ethan Furman (I learnt a lot trying to understand that code).
