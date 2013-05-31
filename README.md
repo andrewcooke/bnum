@@ -401,7 +401,7 @@ provided the solution *and* the motivation to question my betters.
 
 ### Isn't Explicit Better Than Implicit?
 
-Not in this case.
+Not in this case ("a foolish consistency is the hobgoblin of little minds").
 
 But if you disagree, you're welcome to write:
 
@@ -411,8 +411,6 @@ But if you disagree, you're welcome to write:
 ...     green = 'green'
 ...     blue = 'blue'
 ```
-
-A foolish consistency is the hobgoblin of little minds.
 
 Comparison with Enum
 --------------------
