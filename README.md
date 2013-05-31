@@ -395,6 +395,7 @@ Yes, I [did](http://www.acooke.org/cute/Pythonssad0.html).  I was wrong.
 
 [Duncan Booth](http://www.acooke.org/cute/Pythonssad0.html#Fri17May20131519040100)
 provided the solution *and* the motivation to question my betters.
+Thanks, Dunky!
 
 ### Isn't Explicit Better Than Implicit?
 
