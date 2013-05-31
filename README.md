@@ -65,6 +65,7 @@ enumeration values in expressions:
 ...         one
 ...         two
 ...     three = one + two
+...     four = 4
 ...
 >>> isinstance(Number.two, int)
 True
