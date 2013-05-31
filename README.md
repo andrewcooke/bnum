@@ -400,7 +400,7 @@ provided the solution *and* the motivation to question my betters.
 
 Not in this case, apparently.
 
-But if you disagree, you're free to write:
+But, if you disagree, you're free to write:
 
 ```python
 >>> class Colour(ExplicitBnum):
