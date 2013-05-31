@@ -416,7 +416,7 @@ Comparison with Enum
 
 Python has an official Enum type,
 [described in PEP 435](http://www.python.org/dev/peps/pep-0435/).  The code
-used to implement that is
+expected (by me, at least) to implement that is
 [currently on BitBucket](https://bitbucket.org/stoneleaf/ref435) and was
 used as the basis for Bnum.
 
