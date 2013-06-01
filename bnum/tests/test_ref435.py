@@ -48,7 +48,7 @@ try:
 except Exception as exc:
     Answer = exc
 
-class TestExplicitBnum(unittest.TestCase):
+class TestBnum(unittest.TestCase):
     def setUp(self):
         class Season(ExplicitBnum):
             SPRING = 1
@@ -57,15 +57,15 @@ class TestExplicitBnum(unittest.TestCase):
             WINTER = 4
         self.Season = Season
 
-    def test_ExplicitBnum_in_ExplicitBnum_out(self):
+    def test_bnum_in_bnum_out(self):
         Season = self.Season
         self.assertIs(Season(Season.WINTER), Season.WINTER)
 
-    def test_ExplicitBnum_value(self):
+    def test_bnum_value(self):
         Season = self.Season
         self.assertEqual(Season.SPRING.value, 1)
 
-    def test_intExplicitBnum_value(self):
+    def test_int_bnum_value(self):
         self.assertEqual(IntStooges.CURLY.value, 2)
 
     def test_dir_on_class(self):
@@ -83,7 +83,7 @@ class TestExplicitBnum(unittest.TestCase):
             set(['__class__', '__doc__', 'name', 'value']),
             )
 
-    def test_ExplicitBnum(self):
+    def test_bnum(self):
         Season = self.Season
         lst = list(Season)
         self.assertEqual(len(lst), len(Season))
@@ -160,7 +160,7 @@ class TestExplicitBnum(unittest.TestCase):
         with self.assertRaises(TypeError):
             Season.SPRING < Part.CLIP
 
-    def test_ExplicitBnum_duplicates(self):
+    def test_bnum_duplicates(self):
         class Season(ExplicitBnum, allow_aliases=True):
             SPRING = 1
             SUMMER = 2
@@ -184,7 +184,7 @@ class TestExplicitBnum(unittest.TestCase):
                 ['FALL', 'ANOTHER_SPRING'],
                 )
 
-    def test_ExplicitBnum_with_value_name(self):
+    def test_bnum_with_value_name(self):
         class Huh(ExplicitBnum):
             name = 1
             value = 2
@@ -693,7 +693,7 @@ class TestExplicitBnum(unittest.TestCase):
         globals()['SomeTuple'] = SomeTuple
         self.assertIs(loads(dumps(SomeTuple.first)), SomeTuple.first)
 
-    def test_duplicate_values_give_unique_ExplicitBnum_items(self):
+    def test_duplicate_values_give_unique_bnum_items(self):
         class AutoNumber(ExplicitBnum):
             first = ()
             second = ()
@@ -712,7 +712,7 @@ class TestExplicitBnum(unittest.TestCase):
         self.assertEqual(int(AutoNumber.second), 2)
         self.assertIs(AutoNumber(1), AutoNumber.first)
 
-    def test_inherited_new_from_enhanced_ExplicitBnum(self):
+    def test_inherited_new_from_enhanced_bnum(self):
         class AutoNumber(ExplicitBnum):
             def __new__(cls):
                 value = len(cls.__members__) + 1

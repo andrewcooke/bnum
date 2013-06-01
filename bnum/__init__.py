@@ -1,7 +1,8 @@
 
 from collections import OrderedDict
 from itertools import count
-from enum import dunder, break_noisily_on_pickle
+from types import MappingProxyType
+from enum import dunder, break_noisily_on_pickle, _StealthProperty
 
 '''
 Based on Enum, (c) 2013 Ethan Furman, ethan@stoneleaf.us
@@ -199,29 +200,30 @@ class BnumMeta(type):
                 print(cls._enums_by_name)
                 raise ValueError('No name %r' % name)
         if name is None:
-            if value in cls._enums_by_value:
+            if type(value) is cls:
+                return value
+            elif value in cls._enums_by_value:
                 return cls._enums_by_value[value]
             else:
                 raise ValueError('No value %r' % value)
         if name in cls._enums_by_name:
             enum = cls._enums_by_name[name]
-            if value in cls._enums_by_value and \
-                            enum is cls._enums_by_value[value]:
+            if value is enum or \
+                    (value in cls._enums_by_value and \
+                            enum is cls._enums_by_value[value]):
                 return enum
         raise ValueError('Inconsistent name (%r) and value (%r)' %
                         (name, value))
 
     # def __contains__(cls, enum_item):
     #     return isinstance(enum_item, cls) and enum_item.name in cls._enum_map
-    #
-    # def __dir__(self):
-    #     return ['__class__', '__doc__', '__members__'] + self._enum_names
-    #
-    # @property
-    # def __members__(cls):
-    #     """Returns a MappingProxyType of the internal _enum_map structure."""
-    #
-    #     return MappingProxyType(cls._enum_map)
+
+    def __dir__(self):
+        return ['__class__', '__doc__', '__members__'] + list(self._enums_by_name.keys())
+
+    @property
+    def __members__(cls):
+        return MappingProxyType(cls._enums_by_name)
 
     def __getattr__(cls, name):
         """Return the enum member matching `name`
@@ -392,8 +394,8 @@ class Bnum():
     def __str__(self):
         return str(self._value)
 
-    # def __dir__(self):
-    #     return (['__class__', '__doc__', 'name', 'value'])
+    def __dir__(self):
+        return (['__class__', '__doc__', 'name', 'value'])
 
     def __eq__(self, other):
         if type(other) is self.__class__:
@@ -406,11 +408,11 @@ class Bnum():
     def __hash__(self):
         return hash(self._name)
 
-    @property
+    @_StealthProperty
     def name(self):
         return self._name
 
-    @property
+    @_StealthProperty
     def value(self):
         return self._value
 
