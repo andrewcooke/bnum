@@ -26,6 +26,8 @@ identified in a
    * [Why Implicit And Explicit?](#why-implicit-and-explicit)
    * [Didn't You Say This Was A Syntax Error?](#didnt-you-say-this-was-a-syntax-error)
    * [Isn't Explicit Better Than Implicit?](#isnt-explicit-better-than-implicit)
+   * [Why Not Influence The Official Design?](#why-not-influence-the-official-design)
+   * [So This Is What You Think Enum Should Be?](#so-this-is-what-you-think-enum-should-be)
 * [Comparison With Enum](#comparison-with-enum)
    * [Background](#background)
    * [List Of Differences](#list-of-differences)
@@ -413,6 +415,21 @@ But, if you disagree, you're free to write:
 ...     green = 'green'
 ...     blue = 'blue'
 ```
+
+### Why Not Influence The Official Design?
+
+I think a good design comes from one person.  There should be discussion, but
+one person should *own* the design and care enough to make it consistent and
+elegant (so, for example, the language Go has a consistent, elegant design,
+even if it's [nothing like](http://www.acooke.org/cute/GoRocksHow0.html)
+my perfect language).  That seems to have been lost in the Python process for
+Enum (even though generally, with the BDFL approach, they do this quite well).
+
+### So This Is What You Think Enum Should Be?
+
+No.  This design accepts that Enum exists and makes many compromises to
+provide something as similar as possible.  If I were starting from scratch,
+the design would be much simpler.
 
 Comparison with Enum
 --------------------
