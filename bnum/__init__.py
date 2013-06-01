@@ -18,43 +18,6 @@ __all__ = ['ImplicitBnum', 'ExplicitBnum']
 Bnum ,ImplicitBnum, ExplicitBnum = None, None, None
 
 
-class BnumDict(OrderedDict):
-    '''
-    The dictionary supplied by BnumMeta to store the class contents.  We
-    provide a default value when implicit is true, and allow implicit to
-    be enabled via "with implicit".
-
-    An ordered dict is needed to preserve the order of side-effects (things
-    like which alias is preferred).
-    '''
-
-    def __init__(self, implicit, values):
-        super().__init__()
-        self.implicit = implicit
-        self.values = values
-
-    def __enter__(self):
-        self.implicit = True
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.implicit = False
-
-    def __getitem__(self, item):
-        '''Provide a default value of None.'''
-        if self.implicit:
-            if item not in self and not dunder(item):
-                super().__setitem__(item, self.values(item))
-        else:
-            if item not in self and item == 'implicit':
-                return self
-        return super().__getitem__(item)
-
-    def __setitem__(self, name, value):
-        if self.implicit and not dunder(name):
-            raise TypeError('Cannot use explicit value for %s' % name)
-        return super().__setitem__(name, value)
-
-
 ILLEGAL_NAMES = {'mro', '_create', '_get_mixins', '_find_new'}
 
 
@@ -84,6 +47,43 @@ def bits():
     return value
 
 
+class BnumDict(OrderedDict):
+    '''
+    The dictionary supplied by BnumMeta to store the class contents.  We
+    provide a default value when implicit is true, and allow implicit to
+    be enabled via "with implicit".
+
+    An ordered dict is needed to preserve the order of side-effects (things
+    like which alias is preferred).
+    '''
+
+    def __init__(self, implicit=False, values=names):
+        super().__init__()
+        self.implicit = implicit
+        self.values = values
+
+    def __enter__(self):
+        self.implicit = True
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.implicit = False
+
+    def __getitem__(self, item):
+        '''Provide a default value of None.'''
+        if self.implicit:
+            if item not in self and not dunder(item):
+                super().__setitem__(item, self.values(item))
+        else:
+            if item not in self and item == 'implicit':
+                return self
+        return super().__getitem__(item)
+
+    def __setitem__(self, name, value):
+        if self.implicit and not dunder(name):
+            raise TypeError('Cannot use explicit value for %s' % name)
+        return super().__setitem__(name, value)
+
+
 class BnumMeta(type):
     '''
     The class responsible for constructing Bnum instances (both the class,
@@ -108,16 +108,19 @@ class BnumMeta(type):
             metacls._find_new(classdict, obj_type, first_enum)
 
         # separate enumerations from other class members
-        enums_by_name, others = metacls._split_class_contents(classdict)
+        enum_dict, others = metacls._split_class_contents(classdict)
         enums_by_value = {}
+        enums_by_name = {}
 
         # check for illegal enum names
-        if set(enums_by_name.keys()) & ILLEGAL_NAMES:
+        if set(enum_dict.keys()) & ILLEGAL_NAMES:
             raise ValueError('Enumeration names cannot include '
                              + ','.join(ILLEGAL_NAMES))
 
         # create the (empty) Bnum type
         enum_class = super().__new__(metacls, cls, bases, others)
+        # define early so that __members__ can be used in construction
+        enum_class._enums_by_name = enums_by_name
 
         # again, trust Enum on this...
         if obj_type is not object and obj_type.__dict__.get('__getnewargs__') is None:
@@ -126,7 +129,7 @@ class BnumMeta(type):
 
         # instantiate and then check for values (as Enum - someone could use
         # the constructor to do auto-numbering...)
-        for name, value in enums_by_name.items():
+        for name, value in enum_dict.items():
             # again, trust Enum...
             if not isinstance(value, tuple):
                 args = (value, )
@@ -148,9 +151,7 @@ class BnumMeta(type):
             print(repr(enum_item))
             if enum_item.value in enums_by_value:
                 if allow_aliases:
-                    print(name)
                     enums_by_name[name] = enums_by_value[enum_item.value]
-                    print(enums_by_name)
                 else:
                     raise ValueError('Duplicate value for %s, %s' %
                                      (name, enums_by_value[enum_item.value].name))
@@ -170,7 +171,6 @@ class BnumMeta(type):
                 enum_class.__new_member__ = __new__
             enum_class.__new__ = Bnum.__new__
 
-        enum_class._enums_by_name = enums_by_name
         try:
             enum_class._enums_by_value = \
                 OrderedDict((value, enums_by_value[value])
@@ -191,7 +191,10 @@ class BnumMeta(type):
         return enums, others
 
     def __call__(cls, value=None, name=None):
-        if value is None:
+        if type(value) is cls:
+            if name is None or name == value.name:
+                return value
+        elif value is None:
             if name is None:
                 raise ValueError('Give name or value')
             elif name in cls._enums_by_name:
@@ -199,18 +202,15 @@ class BnumMeta(type):
             else:
                 print(cls._enums_by_name)
                 raise ValueError('No name %r' % name)
-        if name is None:
-            if type(value) is cls:
-                return value
-            elif value in cls._enums_by_value:
+        elif name is None:
+            if value in cls._enums_by_value:
                 return cls._enums_by_value[value]
             else:
                 raise ValueError('No value %r' % value)
-        if name in cls._enums_by_name:
+        elif name in cls._enums_by_name:
             enum = cls._enums_by_name[name]
-            if value is enum or \
-                    (value in cls._enums_by_value and \
-                            enum is cls._enums_by_value[value]):
+            if value in cls._enums_by_value and \
+                        enum is cls._enums_by_value[value]:
                 return enum
         raise ValueError('Inconsistent name (%r) and value (%r)' %
                         (name, value))
@@ -242,8 +242,8 @@ class BnumMeta(type):
         except KeyError:
             raise AttributeError(name) from None
 
-    # def __getitem__(cls, name):
-    #     return cls._enum_map[name]
+    def __getitem__(cls, name):
+        return cls._enums_by_name[name]
 
     def __iter__(cls):
         return (cls._enums_by_value[value] for value in cls._enums_by_value)
@@ -272,7 +272,7 @@ class BnumMeta(type):
         for base in bases:
             if  base not in (Bnum, ImplicitBnum, ExplicitBnum) \
                     and issubclass(base, Bnum) \
-                    and base._enum_names:
+                    and base._enums_by_name:
                 raise TypeError("Cannot extend enumerations")
             # base is now the last base in bases
         if not issubclass(base, Bnum):
