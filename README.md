@@ -522,6 +522,8 @@ compromises to provide something as similar as possible.
 If I were starting from scratch, the design would be much simpler -
 inheritance has *way* too much emphasis here.
 
+Which is why I abandoned this project.
+
 Credits
 -------
 
