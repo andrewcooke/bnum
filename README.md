@@ -517,9 +517,10 @@ Enum (even though generally, with the BDFL approach, they do this quite well).
 
 ### So This Is What You Think Enum Should Be?
 
-No.  This design accepts that Enum exists and makes many compromises to
-provide something as similar as possible.  If I were starting from scratch,
-the design would be much simpler.
+No.  Not at all.  This design accepts that Enum exists and makes *many*
+compromises to provide something as similar as possible.
+If I were starting from scratch, the design would be much simpler -
+inheritance has *way* too much emphasis here.
 
 Credits
 -------
