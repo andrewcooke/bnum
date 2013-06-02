@@ -38,10 +38,6 @@ identified in a
 Quick Start
 -----------
 
-```bash
-easy_install bnum
-```
-
 If you just need a set of names:
 
 ```python
