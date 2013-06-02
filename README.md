@@ -1,4 +1,7 @@
 
+This project has been abandoned in favour of
+[simple-enum](https://github.com/andrewcooke/simple-enum).
+
 A (Slightly) Better Enum For Python 3
 =====================================
 
